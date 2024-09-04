@@ -1,0 +1,40 @@
+{
+	"schemaVersion": 1,
+	"id": "strife3",
+	"version": "${version}",
+	"name": "strife3",
+	"description": "This is a mod to experience The Strife: Season III in singleplayer",
+	"authors": [
+		"Pokepandamon"
+	],
+	"contact": {
+		"homepage": "https://www.conglomerate.live/",
+		"sources": "https://github.com/Pokepandamon/Strife-3"
+	},
+	"license": "CC0-1.0",
+	"icon": "assets/strife3/icon.png",
+	"environment": "*",
+	"entrypoints": {
+		"main": [
+			"net.pokepandamon.strife3.Strife3"
+		],
+		"fabric-datagen": [
+			"net.pokepandamon.strife3.Strife3DataGenerator"
+		],
+		"client": [
+			"net.pokepandamon.strife3.Strife3Client"
+		]
+	},
+	"mixins": [
+		"strife3.mixins.json"
+	],
+	"depends": {
+		"fabricloader": ">=0.16.3",
+		"minecraft": "~1.21.1",
+		"java": ">=21",
+		"fabric-api": "*"
+	},
+	"suggests": {
+		"another-mod": "*"
+	}
+}
