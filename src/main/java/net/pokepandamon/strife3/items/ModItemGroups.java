@@ -23,5 +23,6 @@ public class ModItemGroups {
                 entries.add(ModItems.ONYX_KEYCARD);
                 entries.add(ModItems.RED_KEYCARD);
                 entries.add(ModItems.YELLOW_KEYCARD);
+                entries.add(ModItems.BUTCHER_KNIFE);
             }).build());
 }

@@ -4,5 +4,12 @@
   "item.strife3.onyx_keycard": "Onyx Keycard",
   "item.strife3.red_keycard": "Red Keycard",
   "item.strife3.yellow_keycard": "Yellow Keycard",
+  "item.strife3.butcher_knife":  "§9Butcher's Knife",
+  "item.strife3.butcher_knife.tooltip.1": "",
+  "item.strife3.butcher_knife.tooltip.2": "§2§l§oRARITY: ✯✯",
+  "item.strife3.butcher_knife.tooltip.3": "§7",
+  "item.strife3.butcher_knife.tooltip.4": "§2§l§oDAMAGE: ✯",
+  "item.strife3.butcher_knife.tooltip.5": "§7",
+  "item.strife3.butcher_knife.tooltip.6": "§2§l§oEFFICIENCY: ✯✯✯",
   "itemgroup.strife3.strife3_items": "Strife 3 Items"
 }

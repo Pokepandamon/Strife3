@@ -1,8 +1,6 @@
 package net.pokepandamon.strife3.items;
 
-import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemGroups;
+import net.minecraft.item.*;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;
@@ -14,6 +12,7 @@ public class ModItems {
     public static final Item ONYX_KEYCARD = registerItem("onyx_keycard", new Item(new Item.Settings()));
     public static final Item RED_KEYCARD = registerItem("red_keycard", new Item(new Item.Settings()));
     public static final Item YELLOW_KEYCARD = registerItem("yellow_keycard", new Item(new Item.Settings()));
+    public static final Item BUTCHER_KNIFE = registerItem("butcher_knife", new CustomSword("butcher_knife", ToolMaterials.STONE, (new Item.Settings()).attributeModifiers(SwordItem.createAttributeModifiers(ToolMaterials.STONE, 5, 0.3F)).maxDamage(300)));
 
     public static void registerModItems() {
         Strife3.LOGGER.info("Registered Mod Items for " + Strife3.MOD_ID);
