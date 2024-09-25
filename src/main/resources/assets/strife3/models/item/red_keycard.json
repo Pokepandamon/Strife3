@@ -1,11 +1,11 @@
 {
 	"credit": "Made with Blockbench",
 	"textures": {
-		"0": "block/black_wool",
-		"1": "block/red_concrete",
-		"2": "block/iron_block",
-		"3": "block/gold_block",
-		"particle": "block/black_wool"
+		"0": "minecraft:block/black_wool",
+		"1": "minecraft:block/red_concrete",
+		"2": "minecraft:block/iron_block",
+		"3": "minecraft:block/gold_block",
+		"particle": "minecraft:block/black_wool"
 	},
 	"elements": [
 		{

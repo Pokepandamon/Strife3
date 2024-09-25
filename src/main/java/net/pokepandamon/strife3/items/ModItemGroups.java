@@ -24,5 +24,10 @@ public class ModItemGroups {
                 entries.add(ModItems.RED_KEYCARD);
                 entries.add(ModItems.YELLOW_KEYCARD);
                 entries.add(ModItems.BUTCHER_KNIFE);
+                entries.add(ModItems.COMBAT_KNIFE);
+                entries.add(ModItems.CROWBAR);
+                entries.add(ModItems.CRUDE_SWORD);
+                entries.add(ModItems.DEMON_SWORD);
+                entries.add(ModItems.KATANA);
             }).build());
 }
