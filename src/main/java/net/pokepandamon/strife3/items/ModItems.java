@@ -28,11 +28,12 @@ public class ModItems {
     public static final Item YELLOW_KEYCARD = registerItem("yellow_keycard", new Item(new Item.Settings()));
     public static final Item BUTCHER_KNIFE = registerItem("butcher_knife", new CustomSword("butcher_knife", ToolMaterials.STONE, (new Item.Settings()).attributeModifiers(SwordItem.createAttributeModifiers(ToolMaterials.STONE, 0, 0.3F))));
     public static final Item COMBAT_KNIFE = registerItem("combat_knife", new CustomSword("combat_knife", ToolMaterials.STONE, (new Item.Settings()).attributeModifiers(SwordItem.createAttributeModifiers(ToolMaterials.STONE, 0, 0.3F))));
-    public static final Item CROWBAR = registerItem("crowbar", new CustomSword("crowbar", ToolMaterials.STONE, (new Item.Settings()).attributeModifiers(SwordItem.createAttributeModifiers(ToolMaterials.STONE, 0, 0.3F)).component(Enchantment.builder().addEffect(EnchantmentEffectComponentTypes.ITEM_DAMAGE).build())));
+    public static final Item CROWBAR = registerItem("crowbar", new CustomSword("crowbar", ToolMaterials.STONE, (new Item.Settings()).attributeModifiers(SwordItem.createAttributeModifiers(ToolMaterials.STONE, 0, 0.3F))));
     public static final Item CRUDE_SWORD = registerItem("crude_sword", new CustomSword("crude_sword", ToolMaterials.STONE, (new Item.Settings()).attributeModifiers(SwordItem.createAttributeModifiers(ToolMaterials.STONE, 0, 0.3F))));
     //public static final Item DEMON_SWORD = registerItem("demon_sword", new CustomSword("demon_sword", ToolMaterials.STONE, (new Item.Settings()).attributeModifiers(SwordItem.createAttributeModifiers(ToolMaterials.STONE, 0, 0.3F))));
-    public static final Item DEMON_SWORD = registerItem("demon_sword", new CustomSword("demon_sword", ToolMaterials.STONE, (new Item.Settings()).attributeModifiers(DemonSword.attributeModifiersComponent)));
-    public static final Item KATANA = registerItem("katana", new CustomSword("katana", ToolMaterials.STONE, (new Item.Settings()).attributeModifiers(CustomSword.createAttributeModifiers(2, 0.3, 5))));
+    public static final Item DEMON_SWORD = registerItem("demon_sword", new DemonSword("demon_sword", ToolMaterials.STONE, (new Item.Settings()).attributeModifiers(DemonSword.attributeModifiersComponent)));
+    public static final Item KATANA = registerItem("katana", new CustomSword("katana", ToolMaterials.STONE, (new Item.Settings()).attributeModifiers(DemonSword.attributeModifiersComponent)));
+    //.component(Enchantment.builder().addEffect(EnchantmentEffectComponentTypes.ITEM_DAMAGE)
     public static void registerModItems() {
         Strife3.LOGGER.info("Registered Mod Items for " + Strife3.MOD_ID);
     }

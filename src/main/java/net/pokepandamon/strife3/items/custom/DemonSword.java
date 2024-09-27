@@ -1,19 +1,34 @@
 package net.pokepandamon.strife3.items.custom;
 
+import net.minecraft.component.DataComponentTypes;
 import net.minecraft.component.type.AttributeModifierSlot;
 import net.minecraft.component.type.AttributeModifiersComponent;
+import net.minecraft.enchantment.Enchantment;
+import net.minecraft.enchantment.EnchantmentHelper;
+import net.minecraft.enchantment.Enchantments;
 import net.minecraft.entity.attribute.EntityAttributeModifier;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ToolMaterials;
+import net.minecraft.item.tooltip.TooltipType;
+import net.minecraft.registry.Registries;
+import net.minecraft.registry.RegistryKey;
+import net.minecraft.registry.RegistryKeys;
+import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.screen.slot.Slot;
+import net.minecraft.text.Text;
 import net.minecraft.util.ClickType;
+import net.minecraft.util.Formatting;
 import net.minecraft.util.Identifier;
 import net.pokepandamon.strife3.Strife3;
 import net.pokepandamon.strife3.items.CustomSword;
 
+import java.util.List;
+import java.util.Map;
+
+import static net.minecraft.enchantment.Enchantments.UNBREAKING;
 import static net.minecraft.item.Item.BASE_ATTACK_DAMAGE_MODIFIER_ID;
 import static net.minecraft.item.Item.BASE_ATTACK_SPEED_MODIFIER_ID;
 
@@ -34,8 +49,21 @@ public class DemonSword extends CustomSword {
 
     @Override
     public boolean onStackClicked(ItemStack stack, Slot slot, ClickType clickType, PlayerEntity player){
-
+        stack.addEnchantment(player.getWorld().getRegistryManager().get(RegistryKeys.ENCHANTMENT).getEntry(UNBREAKING).get(), 4);
+        stack.set(DataComponentTypes.ENCHANTMENTS, stack.getEnchantments().withShowInTooltip(false));
+        /*stack.addEnchantment(UNBREAKING, 4);
+        stack.addEnchantment(Enchantments.UNBREAKING, 1);
+        stack.addEnchantment(Registries.ENCHANTMENT_EFFECT_COMPONENT_TYPE.get(UNBREAKING), 4);*/
+        /*stack.getTooltip().removeIf(text -> {
+            // Check for enchantment text formatting, e.g., italics or gray color
+            return text.contains(Text.literal("Unbreaking"));
+        });*/
         return false;
     }
 
+    /*@Override
+    public void appendTooltip(ItemStack stack, TooltipContext context, List<Text> tooltip, TooltipType type) {
+        super.appendTooltip(stack, context, tooltip, type);
+        tooltip
+    }*/
 }
