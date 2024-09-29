@@ -29,5 +29,11 @@ public class ModItemGroups {
                 entries.add(ModItems.CRUDE_SWORD);
                 entries.add(ModItems.DEMON_SWORD);
                 entries.add(ModItems.KATANA);
+                entries.add(ModItems.CRUDE_AXE);
+                entries.add(ModItems.DATA_CORE);
+                entries.add(ModItems.ALLOY_AXE);
+                entries.add(ModItems.ALLOY_PICKAXE);
+                entries.add(ModItems.DIVERS_MASK);
+                entries.add(ModItems.MORPHINE);
             }).build());
 }

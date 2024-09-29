@@ -5,23 +5,31 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.tooltip.TooltipType;
 import net.minecraft.text.Text;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class CustomItem extends Item {
-    public CustomItem(Settings settings) {
+    public CustomItem(String itemType, Settings settings) {
         super(settings);
+        this.toolTip = itemTooltips.get(itemType);
     }
 
-    /*@Override
-    public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
-        user.playSound(SoundEvents.BLOCK_WOOL_BREAK, 1.0F, 1.0F);
-        return TypedActionResult.success(user.getStackInHand(hand));
-    }*/
+    private ArrayList<String> toolTip = new ArrayList<String>();
+    //private Identifier BASE_HEALTH_MODIFIER_ID = new Identifier("strife3", "items.custom");
+
+    // Telling the tooltip setter which tooltips to fetch
+    private static Map<String, ArrayList<String>> itemTooltips = new HashMap<String, ArrayList<String>>() {{
+        put("data_core", new ArrayList<String>(){{ add("item.strife3.data_core.tooltip.1"); add("item.strife3.data_core.tooltip.2"); add("item.strife3.data_core.tooltip.3"); add("item.strife3.data_core.tooltip.4");  add("item.strife3.data_core.tooltip.5");}});
+        put("morphine", new ArrayList<String>(){{ add("item.strife3.morphine.tooltip.1"); add("item.strife3.morphine.tooltip.2"); add("item.strife3.morphine.tooltip.3"); add("item.strife3.morphine.tooltip.4"); add("item.strife3.morphine.tooltip.5"); add("item.strife3.morphine.tooltip.6"); add("item.strife3.morphine.tooltip.7"); add("item.strife3.morphine.tooltip.8"); add("item.strife3.morphine.tooltip.9"); }});
+    }};
 
     @Override
     public void appendTooltip(ItemStack stack, TooltipContext context, List<Text> tooltip, TooltipType type) {
-        //super.appendTooltip(stack, context, tooltip, type);
-        tooltip.add(Text.translatable("item.strife3.butcher_knife.tooltip"));
+        for(String line : toolTip){
+            tooltip.add(Text.translatable(line));
+        }
     }
 
     /*@Override
