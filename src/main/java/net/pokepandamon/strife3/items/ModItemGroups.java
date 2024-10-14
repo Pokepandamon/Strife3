@@ -35,5 +35,13 @@ public class ModItemGroups {
                 entries.add(ModItems.ALLOY_PICKAXE);
                 entries.add(ModItems.DIVERS_MASK);
                 entries.add(ModItems.MORPHINE);
+                entries.add(ModItems.HYBRID_MASK);
+                entries.add(ModItems.HEAVY_DIVERS_MASK);
+                entries.add(ModItems.HEAVY_DIVERS_CHESTPLATE);
+                entries.add(ModItems.HEAVY_DIVERS_LEGGINGS);
+                entries.add(ModItems.HEAVY_DIVERS_BOOTS);
+                entries.add(ModItems.JUGGERNAUT);
+                entries.add(ModItems.KINGS_CROWN);
+                entries.add(ModItems.LONG_SWORD);
             }).build());
 }

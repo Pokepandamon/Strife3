@@ -5,8 +5,9 @@ import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectCategory;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
+//import net.minecraft.entity.effect.RegenerationStatusEffect;
 import net.minecraft.entity.player.PlayerEntity;
-import net.pokepandamon.strife3.Strife3;
+import net.pokepandamon.strife3.PlayerMixinInterface;
 
 public class MorphineEffect extends StatusEffect {
     private static StatusEffectInstance regen = new StatusEffectInstance(StatusEffects.REGENERATION, 15*20-2,2, false, false);
@@ -23,28 +24,36 @@ public class MorphineEffect extends StatusEffect {
 
     @Override
     public boolean canApplyUpdateEffect(int duration, int amplifier) {
-        Strife3.LOGGER.info(((Integer) duration).toString());
-        ticksPassed = 300 - duration;
-        return true;
+        return duration == 1;
     }
 
     @Override
     public boolean applyUpdateEffect(LivingEntity entity, int amplifier) {
+        //entity.addStatusEffect(new StatusEffectInstance(StatusEffects.REGENERATION, 15*20-2,2, false, false, false));
         //Strife3.LOGGER.info(ticksPassed.toString());
-        if (ticksPassed == 1) {
-            Strife3.LOGGER.info("Regen Triggered");
-            entity.addStatusEffect(new StatusEffectInstance(StatusEffects.REGENERATION, 15*20-2,2, false, false));
-        }
+        /*if (ticksPassed == 1) {
+            //Strife3.LOGGER.info("Regen Triggered");
+            entity.addStatusEffect(new StatusEffectInstance(StatusEffects.REGENERATION, 15*20-2,2, false, false, false));
+        }*/
 
-        if (ticksPassed == 299) {
-            Strife3.LOGGER.info("Ending Triggered");
-            entity.addStatusEffect(new StatusEffectInstance(StatusEffects.BLINDNESS, 2*20,255, false, false));
-            entity.addStatusEffect(new StatusEffectInstance(StatusEffects.SPEED, 2*20, 255, false, false));
-            entity.addStatusEffect(new StatusEffectInstance(StatusEffects.POISON, 2*20,1, false, false));
-            entity.addStatusEffect(new StatusEffectInstance(StatusEffects.SLOWNESS, 2*20,255, false, false));
-        }
+        //if (ticksPassed == 299) {
+            //Strife3.LOGGER.info("Ending Triggered");
+            entity.addStatusEffect(new StatusEffectInstance(StatusEffects.BLINDNESS, 2*20,255, false, false, false));
+            entity.addStatusEffect(new StatusEffectInstance(StatusEffects.SPEED, 2*20, 255, false, false, false));
+            entity.addStatusEffect(new StatusEffectInstance(StatusEffects.POISON, 2*20,1, false, false, false));
+            entity.addStatusEffect(new StatusEffectInstance(StatusEffects.SLOWNESS, 2*20,255, false, false, false));
+        //}
 
         return super.applyUpdateEffect(entity, amplifier);
+    }
+
+    @Override
+    public void onApplied(LivingEntity entity, int amplifier) {
+        entity.addStatusEffect(new StatusEffectInstance(StatusEffects.REGENERATION, 15*20-2,2, false, false, false));
+        if(entity instanceof PlayerEntity){
+            ((PlayerMixinInterface)entity).useMorphine();
+        }
+        super.onApplied(entity, amplifier);
     }
 
         /* Example

@@ -1,7 +1,5 @@
 package net.pokepandamon.strife3.items;
 
-import net.minecraft.component.EnchantmentEffectComponentTypes;
-import net.minecraft.enchantment.Enchantment;
 import net.minecraft.item.*;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
@@ -36,8 +34,17 @@ public class ModItems {
     public static final Item DATA_CORE = registerItem("data_core", new CustomItem("data_core", (new Item.Settings()).maxCount(1)));
     public static final Item ALLOY_AXE = registerItem("alloy_axe", new AlloyAxe("alloy_axe", ToolMaterials.DIAMOND, (new Item.Settings()).attributeModifiers(AlloyAxe.attributeModifiersComponent)));
     public static final Item ALLOY_PICKAXE = registerItem("alloy_pickaxe", new AlloyPickaxe("alloy_pickaxe", ToolMaterials.DIAMOND, (new Item.Settings()).attributeModifiers(AlloyPickaxe.attributeModifiersComponent)));
-    public static final Item DIVERS_MASK = registerItem("divers_mask", new DiversMask("divers_mask", ArmorMaterialInit.DIVERS_MASK, ArmorItem.Type.HELMET, (new Item.Settings()).maxCount(1)));
+    public static final Item DIVERS_MASK = registerItem("divers_mask", new DiversMask("divers_mask", CustomMaterialInit.DIVERS_MASK, ArmorItem.Type.HELMET, (new Item.Settings()).maxCount(1)));
     public static final Item MORPHINE = registerItem("morphine", new Morphine("morphine", (new Item.Settings()).maxCount(1)));
+    public static final Item HEAVY_DIVERS_MASK = registerItem("heavy_divers_mask", new HeavyDiversMask("heavy_divers_mask", CustomMaterialInit.HEAVY_DIVERS_MASK, ArmorItem.Type.HELMET, (new Item.Settings().maxCount(1))));
+    public static final Item HEAVY_DIVERS_CHESTPLATE = registerItem("heavy_divers_chestplate", new CustomArmor("heavy_divers_chestplate", CustomMaterialInit.HEAVY_DIVERS_CHESTPLATE, ArmorItem.Type.CHESTPLATE, (new Item.Settings().maxCount(1))));
+    public static final Item HEAVY_DIVERS_LEGGINGS = registerItem("heavy_divers_leggings", new CustomArmor("heavy_divers_leggings", CustomMaterialInit.HEAVY_DIVERS_LEGGINGS, ArmorItem.Type.LEGGINGS, (new Item.Settings().maxCount(1))));
+    public static final Item HEAVY_DIVERS_BOOTS = registerItem("heavy_divers_boots", new CustomArmor("heavy_divers_boots", CustomMaterialInit.HEAVY_DIVERS_BOOTS, ArmorItem.Type.BOOTS, (new Item.Settings().maxCount(1))));
+    public static final Item HYBRID_MASK = registerItem("hybrid_mask", new HybridMask("hybrid_mask", CustomMaterialInit.HYBRID_MASK, ArmorItem.Type.HELMET, (new Item.Settings()).maxCount(1)));
+    public static final Item JUGGERNAUT = registerItem("juggernaut", new Juggernaut("juggernaut", CustomMaterialInit.JUGGERNAUT, ArmorItem.Type.HELMET, (new Item.Settings()).maxCount(1)));
+    public static final Item KINGS_CROWN = registerItem("kings_crown", new KingsCrown("kings_crown", CustomMaterialInit.KINGS_CROWN, ArmorItem.Type.HELMET, (new Item.Settings()).maxCount(1).attributeModifiers(KingsCrown.attributeModifiersComponent)));
+    public static final Item LONG_SWORD = registerItem("long_sword", new LongSword("long_sword", ToolMaterials.STONE, (new Item.Settings()).attributeModifiers(LongSword.attributeModifiersComponent).maxDamage(131)));
+    public static final Item NIGHT_VISION_GOGGLES = registerItem("night_vision_goggles", new NightVisionGoggles("night_vision_goggles", CustomMaterialInit.NIGHT_VISION_GOGGLES, ArmorItem.Type.HELMET, (new Item.Settings().maxCount(1))));
 
     public static void registerModItems() {
         Strife3.LOGGER.info("Registered Mod Items for " + Strife3.MOD_ID);

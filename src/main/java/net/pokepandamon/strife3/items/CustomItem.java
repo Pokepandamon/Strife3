@@ -27,8 +27,12 @@ public class CustomItem extends Item {
 
     @Override
     public void appendTooltip(ItemStack stack, TooltipContext context, List<Text> tooltip, TooltipType type) {
-        for(String line : toolTip){
-            tooltip.add(Text.translatable(line));
+        try{
+            for(String line : toolTip){
+                tooltip.add(Text.translatable(line));
+            }
+        } catch (Exception e) {
+            tooltip.add(Text.of("Not yet"));
         }
     }
 

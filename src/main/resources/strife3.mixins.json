@@ -3,7 +3,11 @@
 	"package": "net.pokepandamon.strife3.mixin",
 	"compatibilityLevel": "JAVA_21",
 	"mixins": [
-		"ExampleMixin"
+		"ExampleMixin",
+		"MixinEntityPlayer",
+		"MixinAbstractInventoryScreen",
+		"MixinLivingEntity",
+		"MixinServerPlayerEntity"
 	],
 	"injectors": {
 		"defaultRequire": 1

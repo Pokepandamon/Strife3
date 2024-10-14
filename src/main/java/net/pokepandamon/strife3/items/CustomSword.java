@@ -27,6 +27,7 @@ public class CustomSword extends SwordItem {
         put("crude_sword", new ArrayList<String>(){{ add("item.strife3.crude_sword.tooltip.1"); add("item.strife3.crude_sword.tooltip.2"); add("item.strife3.crude_sword.tooltip.3"); add("item.strife3.crude_sword.tooltip.4"); add("item.strife3.crude_sword.tooltip.5"); add("item.strife3.crude_sword.tooltip.6"); add("item.strife3.crude_sword.tooltip.7"); }});
         put("demon_sword", new ArrayList<String>(){{ add("item.strife3.demon_sword.tooltip.1"); add("item.strife3.demon_sword.tooltip.2"); add("item.strife3.demon_sword.tooltip.3"); add("item.strife3.demon_sword.tooltip.4"); add("item.strife3.demon_sword.tooltip.5"); add("item.strife3.demon_sword.tooltip.6"); add("item.strife3.demon_sword.tooltip.7"); add("item.strife3.demon_sword.tooltip.8"); add("item.strife3.demon_sword.tooltip.9"); add("item.strife3.demon_sword.tooltip.10"); add("item.strife3.demon_sword.tooltip.11"); add("item.strife3.demon_sword.tooltip.12"); add("item.strife3.demon_sword.tooltip.13"); add("item.strife3.demon_sword.tooltip.14"); add("item.strife3.demon_sword.tooltip.15"); add("item.strife3.demon_sword.tooltip.16"); add("item.strife3.demon_sword.tooltip.17"); }});
         put("katana", new ArrayList<String>(){{add("item.strife3.katana.tooltip.1"); add("item.strife3.katana.tooltip.2"); add("item.strife3.katana.tooltip.3"); add("item.strife3.katana.tooltip.4"); add("item.strife3.katana.tooltip.5"); add("item.strife3.katana.tooltip.6"); add("item.strife3.katana.tooltip.7"); add("item.strife3.katana.tooltip.8");}});
+        put("long_sword", new ArrayList<String>(){{ add("item.strife3.long_sword.tooltip.1"); add("item.strife3.long_sword.tooltip.2"); add("item.strife3.long_sword.tooltip.3"); add("item.strife3.long_sword.tooltip.4"); add("item.strife3.long_sword.tooltip.5"); add("item.strife3.long_sword.tooltip.6"); }});
     }};
 
     public CustomSword(String itemType, ToolMaterials toolMaterials, Settings settings) {
@@ -36,8 +37,12 @@ public class CustomSword extends SwordItem {
 
     @Override
     public void appendTooltip(ItemStack stack, TooltipContext context, List<Text> tooltip, TooltipType type) {
-        for(String line : toolTip){
-            tooltip.add(Text.translatable(line));
+        try{
+            for(String line : toolTip){
+                tooltip.add(Text.translatable(line));
+            }
+        } catch (Exception e) {
+            tooltip.add(Text.of("Not yet"));
         }
 
         //super.appendTooltip(stack, context, tooltip, type);
