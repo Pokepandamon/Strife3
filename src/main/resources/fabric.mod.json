@@ -23,6 +23,9 @@
 		],
 		"client": [
 			"net.pokepandamon.strife3.Strife3Client"
+		],
+		"modmenu": [
+			"net.pokepandamon.strife3.Strife3ModMenuApiImpl"
 		]
 	},
 	"mixins": [

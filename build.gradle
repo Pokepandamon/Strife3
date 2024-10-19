@@ -23,6 +23,13 @@ repositories {
 			includeGroup("software.bernie.geckolib")
 		}
 	}
+	maven{
+		name = "Terraformers"
+		url = "https://maven.terraformersmc.com/"
+	}
+	maven {
+		url "https://maven.shedaniel.me/"
+	}
 }
 
 fabricApi {
@@ -39,6 +46,12 @@ dependencies {
 	modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
 
 	modImplementation "software.bernie.geckolib:geckolib-fabric-${minecraft_version}:${geckolib_version}"
+
+	modImplementation("com.terraformersmc:modmenu:${project.modmenu_version}")
+
+	modApi("me.shedaniel.cloth:cloth-config-fabric:15.0.140"){
+		exclude(group: "net.fabricmc.fabric-api")
+	}
 	
 }
 

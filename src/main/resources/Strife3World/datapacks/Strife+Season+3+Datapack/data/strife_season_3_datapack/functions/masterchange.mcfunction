@@ -1,0 +1,2 @@
+execute as @p[predicate=!strife_season_3_datapack:end] at @s run function strife_season_3_datapack:regular
+execute as @p[predicate=strife_season_3_datapack:end] at @s run function strife_season_3_datapack:abnormal

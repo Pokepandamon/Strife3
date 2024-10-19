@@ -4,6 +4,7 @@ import com.mojang.authlib.GameProfile;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.network.packet.s2c.play.GameMessageS2CPacket;
 import net.minecraft.network.packet.s2c.play.SubtitleS2CPacket;
 import net.minecraft.network.packet.s2c.play.TitleS2CPacket;
 import net.minecraft.server.network.ServerPlayerEntity;
@@ -27,6 +28,7 @@ public abstract class MixinServerPlayerEntity extends MixinEntityPlayer implemen
     @Shadow @Final private static Logger LOGGER;
 
     @Unique private boolean seenZoneChange = false;
+    @Unique private boolean clientAdminValue;
 
     protected MixinServerPlayerEntity(EntityType<? extends LivingEntity> entityType, World world) {
         super(entityType, world);
@@ -39,6 +41,7 @@ public abstract class MixinServerPlayerEntity extends MixinEntityPlayer implemen
 
     @Override
     public void locationTick(){
+        //LOGGER.info(String.valueOf(this.getWorld()));
         //LOGGER.info("X: " + this.getX() + " Y: " + this.getY() + " Z: " + this.getZ() + " RX: " + ((Double) this.getX()).intValue() + " RY: " + ((Double) this.getY()).intValue() + " RZ: " + ((Double) this.getZ()).intValue() + " Zone: " + super.currentZone + " Seen: " + seenZoneChange);
         if(seenZoneChange){seenZoneChange = !(this.getY() <= 90 || (this.getY() >= 110 && this.getY() <= 140) || this.getY() >= 160);}
         if(!seenZoneChange && ((((Double) this.getY()).intValue() == 100) || (((Double) this.getY()).intValue() == 150))){
@@ -65,11 +68,18 @@ public abstract class MixinServerPlayerEntity extends MixinEntityPlayer implemen
                 }
             }
 
+            //net.minecraft.network.packet.s2c.play.
+
             TitleS2CPacket titlePacket = new TitleS2CPacket(title);
             SubtitleS2CPacket subtitlePacket = new SubtitleS2CPacket(subtitle);
 
             ((ServerPlayerEntity)(Object)this).networkHandler.sendPacket(titlePacket);
             ((ServerPlayerEntity)(Object)this).networkHandler.sendPacket(subtitlePacket);
+        }
+        //LOGGER.info("Inside Water: " + this.isInsideWaterOrBubbleColumn() + " | My Check" + this.getWorld().getBlockState(new BlockPos((int) this.getX(), (int)this.getY(), (int)this.getZ())));
+        if(this.isInsideWaterOrBubbleColumn()){
+            //LOGGER.info("I WAS HERE");
+            ((ServerPlayerEntity)(Object)this).networkHandler.sendPacket(new GameMessageS2CPacket(Text.literal("Depth: " + ((Double) this.getY()).intValue() +  " meters"), true));
         }
         super.locationTick();
     }
@@ -77,5 +87,15 @@ public abstract class MixinServerPlayerEntity extends MixinEntityPlayer implemen
     @Inject(method= "tick", at=@At("HEAD"))
     public void tick(CallbackInfo ci){
         this.customServerPlayerTick();
+    }
+
+    @Override
+    public void setClientAdminValue(boolean newClientAdminValue){
+        this.clientAdminValue = newClientAdminValue;
+    }
+
+    @Override
+    public boolean getClientAdminValue(){
+        return clientAdminValue;
     }
 }

@@ -1,0 +1,11 @@
+{
+  "condition": "minecraft:entity_properties",
+  "entity": "this",
+  "predicate": {
+    "equipment": {
+      "mainhand": {
+        "tag": "strife_season_3_datapack:illegal"
+      }
+    }
+  }
+}

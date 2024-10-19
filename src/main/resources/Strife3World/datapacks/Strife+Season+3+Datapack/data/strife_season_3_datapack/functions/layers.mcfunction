@@ -1,0 +1,10 @@
+execute as @a[scores={yPos=..99}] at @s run tag @p add deep
+execute as @a[scores={yPos=101..149}] at @s run tag @p add semiDeep
+execute as @a[scores={yPos=150..255}] at @s run tag @p add shallow
+execute as @a[scores={yPos=255..}] at @s run tag @p add aboveWater
+execute as @a[scores={yPos=101..149}] at @s run tag @p remove deep
+execute as @a[scores={yPos=..99}] at @s run tag @p remove semiDeep
+execute as @a[scores={yPos=151..}] at @s run tag @p remove semiDeep
+execute as @a[scores={yPos=..150}] at @s run tag @p remove shallow
+execute as @a[scores={yPos=255..}] at @s run tag @p remove shallow
+execute as @a[scores={yPos=..255}] at @s run tag @p remove aboveWater

@@ -1,0 +1,35 @@
+{
+  "type": "minecraft:chest",
+  "pools": [
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:iron_sword",
+          "weight": 1,
+          "functions": [
+            {
+              "function": "set_count",
+              "count": {
+                "min": 1,
+                "max": 1
+              }
+            },
+	    {
+             "function": "minecraft:set_name",
+              "name": {
+                "text": "AH",
+                "color": "white"
+              }
+	    },
+            {
+              "function":"set_nbt",
+               "tag":"{AttributeModifiers: [{Slot: \"mainhand\", AttributeName: \"minecraft:generic.knockback_resistance\", Operation: 0, UUID: [I; -1104476586, 1576420083, -1910122431, 549105671], Name: \"&eDefault name\", Amount: -1.0d}, {Slot: \"mainhand\", AttributeName: \"minecraft:generic.max_health\", Operation: 0, UUID: [I; -1941754002, 212618249, -1343516523, 1592052104], Name: \"EI-ID:BubbleSword\", Amount: 0.0d}], Enchantments: [{id: \"minecraft:power\", lvl: 5s}, {id: \"minecraft:vanishing_curse\", lvl: 1s}], display: {Name: '{\"extra\":[{\"bold\":true,\"italic\":true,\"underlined\":false,\"strikethrough\":false,\"obfuscated\":false,\"color\":\"dark_aqua\",\"text\":\"Bubble Sword\"}],\"text\":\"\"}', Lore: ['{\"text\":\"\"}', '{\"extra\":[{\"bold\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"obfuscated\":false,\"color\":\"dark_green\",\"text\":\"Magic sword lost deep at sea.\"}],\"text\":\"\"}', '{\"extra\":[{\"text\":\"Magic level: 3\"}],\"text\":\"\"}', '{\"extra\":[{\"bold\":false,\"italic\":true,\"underlined\":false,\"strikethrough\":false,\"obfuscated\":false,\"color\":\"gray\",\"text\":\"Remaining use: 22\"}],\"text\":\"\"}']}, Damage: 0, HideFlags: 97}"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

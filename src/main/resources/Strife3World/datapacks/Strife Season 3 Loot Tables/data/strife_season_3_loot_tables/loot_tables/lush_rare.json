@@ -1,0 +1,400 @@
+{
+  "pools": [
+    {
+      "rolls": {
+        "min": 9,
+        "max": 11
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "weight": 25,
+          "name": "minecraft:brewing_stand"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 35,
+          "name": "minecraft:compass",
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": {
+                "min": 1,
+                "max": 2
+              }
+            }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 7,
+          "name": "minecraft:creeper_banner_pattern"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 7,
+          "name": "minecraft:globe_banner_pattern"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 10,
+          "name": "minecraft:ender_pearl",
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": {
+                "min": 1,
+                "max": 2
+              }
+            }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 20,
+          "name": "minecraft:experience_bottle",
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": {
+                "min": 10,
+                "max": 20
+              }
+            }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 20,
+          "name": "minecraft:honey_bottle",
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": {
+                "min": 10,
+                "max": 16
+              }
+            }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 10,
+          "name": "minecraft:large_fern",
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": {
+                "min": 2,
+                "max": 4
+              }
+            }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 7,
+          "name": "minecraft:painting"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 10,
+          "name": "minecraft:rabbit_foot",
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": {
+                "min": 1,
+                "max": 3
+              }
+            }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 10,
+          "name": "minecraft:potion",
+          "functions": [
+            {
+              "function": "minecraft:set_nbt",
+              "tag": "{Potion:\"minecraft:strong_strength\"}"
+            }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 7,
+          "name": "minecraft:splash_potion",
+          "functions": [
+            {
+              "function": "minecraft:set_nbt",
+              "tag": "{Potion:\"minecraft:strong_poison\"}"
+            }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 10,
+          "name": "minecraft:scute",
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": {
+                "min": 4,
+                "max": 8
+              }
+            }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 10,
+          "name": "minecraft:turtle_egg",
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": {
+                "min": 2,
+                "max": 4
+              }
+            }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 7,
+          "name": "minecraft:enchanted_book",
+          "functions": [
+            {
+              "function": "minecraft:set_nbt",
+              "tag": "{Enchantments:[{id:\"channeling\",lvl:1s}]}"
+            }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 7,
+          "name": "minecraft:enchanted_book",
+          "functions": [
+            {
+              "function": "minecraft:set_nbt",
+              "tag": "{Enchantments:[{id:\"efficiency\",lvl:4s}]}"
+            }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 7,
+          "name": "minecraft:enchanted_book",
+          "functions": [
+            {
+              "function": "minecraft:set_nbt",
+              "tag": "{Enchantments:[{id:\"feather_falling\",lvl:3s}]}"
+            }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 7,
+          "name": "minecraft:enchanted_book",
+          "functions": [
+            {
+              "function": "minecraft:set_nbt",
+              "tag": "{Enchantments:[{id:\"impaling\",lvl:3s}]}"
+            }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 7,
+          "name": "minecraft:enchanted_book",
+          "functions": [
+            {
+              "function": "minecraft:set_nbt",
+              "tag": "{Enchantments:[{id:\"looting\",lvl:2s}]}"
+            }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 7,
+          "name": "minecraft:enchanted_book",
+          "functions": [
+            {
+              "function": "minecraft:set_nbt",
+              "tag": "{Enchantments:[{id:\"loyalty\",lvl:2s}]}"
+            }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 7,
+          "name": "minecraft:enchanted_book",
+          "functions": [
+            {
+              "function": "minecraft:set_nbt",
+              "tag": "{Enchantments:[{id:\"protection\",lvl:2s}]}"
+            }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 4,
+          "name": "minecraft:enchanted_book",
+          "functions": [
+            {
+              "function": "minecraft:set_nbt",
+              "tag": "{Enchantments:[{id:\"protection\",lvl:3s}]}"
+            }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 7,
+          "name": "minecraft:enchanted_book",
+          "functions": [
+            {
+              "function": "minecraft:set_nbt",
+              "tag": "{Enchantments:[{id:\"sharpness\",lvl:3s}]}"
+            }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 7,
+          "name": "minecraft:enchanted_book",
+          "functions": [
+            {
+              "function": "minecraft:set_nbt",
+              "tag": "{Enchantments:[{id:\"sweeping\",lvl:3s}]}"
+            }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 7,
+          "name": "minecraft:enchanted_book",
+          "functions": [
+            {
+              "function": "minecraft:set_nbt",
+              "tag": "{Enchantments:[{id:\"thorns\",lvl:2s}]}"
+            }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 7,
+          "name": "minecraft:enchanted_book",
+          "functions": [
+            {
+              "function": "minecraft:set_nbt",
+              "tag": "{Enchantments:[{id:\"unbreaking\",lvl:2s}]}"
+            }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 7,
+          "name": "minecraft:spore_blossom",
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": {
+                "min": 1,
+                "max": 2
+              }
+            }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 12,
+          "name": "minecraft:paper",
+          "functions": [
+            {
+              "function": "minecraft:set_nbt",
+              "tag": "{HideFlags: 103, display: {Name: '{\"extra\":[{\"bold\":true,\"italic\":true,\"underlined\":false,\"strikethrough\":false,\"obfuscated\":false,\"color\":\"dark_purple\",\"text\":\"Androgenic Steroids\"}],\"text\":\"\"}', Lore: ['{\"text\":\"\"}', '{\"extra\":[{\"bold\":true,\"italic\":true,\"underlined\":false,\"strikethrough\":false,\"obfuscated\":false,\"color\":\"dark_aqua\",\"text\":\"Duration: 1:50\"}],\"text\":\"\"}', '{\"extra\":[{\"bold\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"obfuscated\":false,\"color\":\"gray\",\"text\":\"\"}],\"text\":\"\"}', '{\"extra\":[{\"bold\":true,\"italic\":true,\"underlined\":false,\"strikethrough\":false,\"obfuscated\":false,\"color\":\"dark_aqua\",\"text\":\"Strength: 3x\"}],\"text\":\"\"}', '{\"extra\":[{\"bold\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"obfuscated\":false,\"color\":\"gray\",\"text\":\"\"}],\"text\":\"\"}', '{\"extra\":[{\"bold\":true,\"italic\":true,\"underlined\":false,\"strikethrough\":false,\"obfuscated\":false,\"color\":\"dark_aqua\",\"text\":\"Side effects:\"}],\"text\":\"\"}', '{\"extra\":[{\"bold\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"obfuscated\":false,\"color\":\"dark_green\",\"text\":\"After an initial burst of energy and\"}],\"text\":\"\"}', '{\"extra\":[{\"bold\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"obfuscated\":false,\"color\":\"dark_green\",\"text\":\"strength, you will feel tired and\"}],\"text\":\"\"}', '{\"extra\":[{\"bold\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"obfuscated\":false,\"color\":\"dark_green\",\"text\":\"won out for a short duration.\"}],\"text\":\"\"}', '{\"extra\":[{\"bold\":false,\"italic\":true,\"underlined\":false,\"strikethrough\":false,\"obfuscated\":false,\"color\":\"gray\",\"text\":\"Remaining use: 1\"}],\"text\":\"\"}']}, Unbreakable: 1b, AttributeModifiers: [{Slot: \"mainhand\", Amount: 0.0d, Operation: 0, UUID: [I; -1941754002, 212618249, -1343516523, 1592052104], Name: \"EI-ID:strength\", AttributeName: \"minecraft:generic.max_health\"}], CustomModelData: 6}"
+            }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 12,
+          "name": "minecraft:paper",
+          "functions": [
+            {
+              "function": "minecraft:set_nbt",
+              "tag": "{HideFlags: 103, AttributeModifiers: [{Name: \"EI-ID:healing\", Amount: 0.0d, Operation: 0, UUID: [I; -1941754002, 212618249, -1343516523, 1592052104], Slot: \"mainhand\", AttributeName: \"minecraft:generic.max_health\"}], CustomModelData: 8, display: {Name: '{\"extra\":[{\"bold\":true,\"italic\":true,\"underlined\":false,\"strikethrough\":false,\"obfuscated\":false,\"color\":\"dark_purple\",\"text\":\"Analgesic Morphine\"}],\"text\":\"\"}', Lore: ['{\"text\":\"\"}', '{\"extra\":[{\"bold\":true,\"italic\":true,\"underlined\":false,\"strikethrough\":false,\"obfuscated\":false,\"color\":\"dark_aqua\",\"text\":\"Duration: 0:30\"}],\"text\":\"\"}', '{\"extra\":[{\"bold\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"obfuscated\":false,\"color\":\"gray\",\"text\":\"\"}],\"text\":\"\"}', '{\"extra\":[{\"bold\":true,\"italic\":true,\"underlined\":false,\"strikethrough\":false,\"obfuscated\":false,\"color\":\"dark_aqua\",\"text\":\"Strength: 2x\"}],\"text\":\"\"}', '{\"extra\":[{\"bold\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"obfuscated\":false,\"color\":\"gray\",\"text\":\"\"}],\"text\":\"\"}', '{\"extra\":[{\"bold\":true,\"italic\":true,\"underlined\":false,\"strikethrough\":false,\"obfuscated\":false,\"color\":\"dark_aqua\",\"text\":\"Side effects:\"}],\"text\":\"\"}', '{\"extra\":[{\"bold\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"obfuscated\":false,\"color\":\"dark_green\",\"text\":\"After the initial effect wears off,\"}],\"text\":\"\"}', '{\"extra\":[{\"bold\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"obfuscated\":false,\"color\":\"dark_green\",\"text\":\"nerves may be damaged, possibly\"}],\"text\":\"\"}', '{\"extra\":[{\"bold\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"obfuscated\":false,\"color\":\"dark_green\",\"text\":\"resulting in painful stimulation.\"}],\"text\":\"\"}', '{\"extra\":[{\"bold\":false,\"italic\":true,\"underlined\":false,\"strikethrough\":false,\"obfuscated\":false,\"color\":\"gray\",\"text\":\"Remaining use: 1\"}],\"text\":\"\"}']}}"
+            }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 12,
+          "name": "minecraft:diamond_axe",
+          "functions": [
+            {
+              "function": "minecraft:set_nbt",
+              "tag": "{HideFlags: 65, Damage: 0, Enchantments: [{id: \"minecraft:efficiency\", lvl: 3s}, {id: \"minecraft:mending\", lvl: 1s}], AttributeModifiers: [{Name: \"EI-ID:diamondaxe\", Amount: 0.0d, Operation: 0, UUID: [I; -1941754002, 212618249, -1343516523, 1592052104], Slot: \"mainhand\", AttributeName: \"minecraft:generic.max_health\"}, {Name: \"&eDefault name\", Amount: -3.5d, Operation: 0, UUID: [I; -1569321231, -1681702577, -1936430317, 171139434], Slot: \"mainhand\", AttributeName: \"minecraft:generic.attack_speed\"}, {Name: \"&eDefault name\", Amount: 5.0d, Operation: 0, UUID: [I; 1223501950, -1099478996, -1514889454, -1659697490], Slot: \"mainhand\", AttributeName: \"minecraft:generic.attack_damage\"}], CustomModelData: 1, display: {Name: '{\"extra\":[{\"bold\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"obfuscated\":false,\"color\":\"gold\",\"text\":\"Alloy Axe\"}],\"text\":\"\"}', Lore: ['{\"text\":\"\"}', '{\"extra\":[{\"bold\":true,\"italic\":true,\"underlined\":false,\"strikethrough\":false,\"obfuscated\":false,\"color\":\"dark_green\",\"text\":\"RARITY: ✮✮✮✮\"}],\"text\":\"\"}', '{\"extra\":[{\"bold\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"obfuscated\":false,\"color\":\"gray\",\"text\":\"\"}],\"text\":\"\"}', '{\"extra\":[{\"bold\":true,\"italic\":true,\"underlined\":false,\"strikethrough\":false,\"obfuscated\":false,\"color\":\"dark_green\",\"text\":\"DAMAGE: ✮✮\"}],\"text\":\"\"}', '{\"extra\":[{\"bold\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"obfuscated\":false,\"color\":\"gray\",\"text\":\"\"}],\"text\":\"\"}', '{\"extra\":[{\"bold\":true,\"italic\":true,\"underlined\":false,\"strikethrough\":false,\"obfuscated\":false,\"color\":\"dark_green\",\"text\":\"EFFICIENCY: ✮✮✮✮✮\"}],\"text\":\"\"}', '{\"extra\":[{\"bold\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"obfuscated\":false,\"color\":\"gray\",\"text\":\"\"}],\"text\":\"\"}', '{\"extra\":[{\"bold\":true,\"italic\":true,\"underlined\":false,\"strikethrough\":false,\"obfuscated\":false,\"color\":\"gold\",\"text\":\"☣☣☣ Legendary Item ☣☣☣\"}],\"text\":\"\"}']}}"
+            }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 15,
+          "name": "minecraft:iron_pickaxe",
+          "functions": [
+            {
+              "function": "minecraft:set_nbt",
+              "tag": "{HideFlags: 65, Damage: 0, Enchantments: [{id: \"minecraft:efficiency\", lvl: 1s}], AttributeModifiers: [{Name: \"EI-ID:steelpick\", Amount: 0.0d, Operation: 0, UUID: [I; -1941754002, 212618249, -1343516523, 1592052104], Slot: \"mainhand\", AttributeName: \"minecraft:generic.max_health\"}, {Name: \"&eDefault name\", Amount: -3.5d, Operation: 0, UUID: [I; -1961897444, 1432636165, -1885292266, -1763921102], Slot: \"mainhand\", AttributeName: \"minecraft:generic.attack_speed\"}, {Name: \"&eDefault name\", Amount: 4.0d, Operation: 0, UUID: [I; -631114290, -2068363881, -1427671890, 6386587], Slot: \"mainhand\", AttributeName: \"minecraft:generic.attack_damage\"}], CustomModelData: 1, display: {Name: '{\"extra\":[{\"bold\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"obfuscated\":false,\"color\":\"dark_aqua\",\"text\":\"Steel Pickaxe\"}],\"text\":\"\"}', Lore: ['{\"text\":\"\"}', '{\"extra\":[{\"bold\":true,\"italic\":true,\"underlined\":false,\"strikethrough\":false,\"obfuscated\":false,\"color\":\"dark_green\",\"text\":\"RARITY: ✯✯\"}],\"text\":\"\"}', '{\"extra\":[{\"bold\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"obfuscated\":false,\"color\":\"gray\",\"text\":\"\"}],\"text\":\"\"}', '{\"extra\":[{\"bold\":true,\"italic\":true,\"underlined\":false,\"strikethrough\":false,\"obfuscated\":false,\"color\":\"dark_green\",\"text\":\"DAMAGE: ✯✯\"}],\"text\":\"\"}', '{\"extra\":[{\"bold\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"obfuscated\":false,\"color\":\"gray\",\"text\":\"\"}],\"text\":\"\"}', '{\"extra\":[{\"bold\":true,\"italic\":true,\"underlined\":false,\"strikethrough\":false,\"obfuscated\":false,\"color\":\"dark_green\",\"text\":\"EFFICIENCY: ✯✯✯\"}],\"text\":\"\"}']}}"
+            }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 15,
+          "name": "minecraft:stone_sword",
+          "functions": [
+            {
+              "function": "minecraft:set_nbt",
+              "tag": "{Enchantments:[{id:\"unbreaking\",lvl:2s}], HideFlags: 64, Damage: 0, AttributeModifiers: [{Name: \"&eDefault name\", Amount: -0.02d, Operation: 0, UUID: [I; -126473543, -764654810, -1627178282, 1885423192], Slot: \"mainhand\", AttributeName: \"minecraft:generic.movement_speed\"}, {Name: \"EI-ID:longsword\", Amount: 0.0d, Operation: 0, UUID: [I; -1941754002, 212618249, -1343516523, 1592052104], Slot: \"mainhand\", AttributeName: \"minecraft:generic.max_health\"}, {Name: \"&eDefault name\", Amount: -2.7d, Operation: 0, UUID: [I; 52933747, 1036731581, -1648821253, -2087488183], Slot: \"mainhand\", AttributeName: \"minecraft:generic.attack_speed\"}, {Name: \"&eDefault name\", Amount: 9.0d, Operation: 0, UUID: [I; 771494365, -1481028933, -2056392174, -611937003], Slot: \"mainhand\", AttributeName: \"minecraft:generic.attack_damage\"}], CustomModelData: 9, display: {Name: '{\"extra\":[{\"bold\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"obfuscated\":false,\"color\":\"dark_aqua\",\"text\":\"Longsword\"}],\"text\":\"\"}', Lore: ['{\"text\":\"\"}', '{\"extra\":[{\"bold\":true,\"italic\":true,\"underlined\":false,\"strikethrough\":false,\"obfuscated\":false,\"color\":\"dark_green\",\"text\":\"RARITY: ✯✯✯✯\"}],\"text\":\"\"}', '{\"extra\":[{\"bold\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"obfuscated\":false,\"color\":\"gray\",\"text\":\"\"}],\"text\":\"\"}', '{\"extra\":[{\"bold\":true,\"italic\":true,\"underlined\":false,\"strikethrough\":false,\"obfuscated\":false,\"color\":\"dark_green\",\"text\":\"DAMAGE: ✯✯✯\"}],\"text\":\"\"}', '{\"extra\":[{\"bold\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"obfuscated\":false,\"color\":\"gray\",\"text\":\"\"}],\"text\":\"\"}', '{\"extra\":[{\"bold\":true,\"italic\":true,\"underlined\":false,\"strikethrough\":false,\"obfuscated\":false,\"color\":\"dark_green\",\"text\":\"EFFICIENCY: ✯✯✯✯\"}],\"text\":\"\"}']}}"
+            }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 25,
+          "name": "minecraft:paper",
+          "functions": [
+            {
+              "function": "minecraft:set_nbt",
+              "tag": "{HideFlags: 66, AttributeModifiers: [{Name: \"EI-ID:medkit\", Amount: 0.0d, Operation: 0, UUID: [I; 407405674, 383011286, -1154964295, -1025668371], Slot: \"mainhand\", AttributeName: \"minecraft:generic.max_health\"}], CustomModelData: 5, display: {Name: '{\"extra\":[{\"bold\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"obfuscated\":false,\"color\":\"dark_aqua\",\"text\":\"Medkit\"}],\"text\":\"\"}', Lore: ['{\"text\":\"\"}', '{\"extra\":[{\"bold\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"obfuscated\":false,\"color\":\"dark_red\",\"text\":\"Right-click to heal\"}],\"text\":\"\"}', '{\"extra\":[{\"bold\":false,\"italic\":true,\"underlined\":false,\"strikethrough\":false,\"obfuscated\":false,\"color\":\"gray\",\"text\":\"Remaining use: 1\"}],\"text\":\"\"}']}}"
+            }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 15,
+          "name": "minecraft:iron_nugget",
+          "functions": [
+            {
+              "function": "minecraft:set_nbt",
+              "tag": "{display: {Name: '{\"extra\":[{\"bold\":true,\"italic\":true,\"underlined\":false,\"strikethrough\":false,\"obfuscated\":false,\"color\":\"dark_purple\",\"text\":\"Juggernaut Helmet\"}],\"text\":\"\"}', Lore: ['{\"text\":\"\"}', '{\"extra\":[{\"bold\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"obfuscated\":false,\"color\":\"dark_green\",\"text\":\"Protective helmet designed by bomb squads and\"}],\"text\":\"\"}', '{\"extra\":[{\"bold\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"obfuscated\":false,\"color\":\"dark_green\",\"text\":\"military police. Protects the wearer\\'s head better than\"}],\"text\":\"\"}', '{\"extra\":[{\"bold\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"obfuscated\":false,\"color\":\"dark_green\",\"text\":\"most other helmets of its type.\"}],\"text\":\"\"}']}, Enchantments: [{id: \"minecraft:protection\", lvl: 3s}], CustomModelData: 31, AttributeModifiers: [{Name: \"EI-ID:juggernauthelmet\", AttributeName: \"minecraft:generic.max_health\", Operation: 0, UUID: [I; -904440809, 1231176202, -1894276338, 920079496], Slot: \"head\", Amount: 0.0d}, {Name: \"&eDefault name\", AttributeName: \"minecraft:generic.armor\", Operation: 0, UUID: [I; 301681185, 1400520748, -2080052941, 271566203], Slot: \"head\", Amount: 8.0d}, {Name: \"&eDefault name\", AttributeName: \"minecraft:generic.armor_toughness\", Operation: 0, UUID: [I; -992617099, 452412733, -1275554496, 1814177243], Slot: \"head\", Amount: 5.0d}], HideFlags: 64}"
+            }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 15,
+          "name": "minecraft:iron_nugget",
+          "functions": [
+            {
+              "function": "minecraft:set_nbt",
+              "tag": "{display: {Name: '{\"extra\":[{\"bold\":true,\"italic\":true,\"underlined\":false,\"strikethrough\":false,\"obfuscated\":false,\"color\":\"gold\",\"text\":\"Hybrid Mask MKII\"}],\"text\":\"\"}', Lore: ['{\"text\":\"\"}', '{\"extra\":[{\"bold\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"obfuscated\":false,\"color\":\"dark_green\",\"text\":\"Deep Optic\\'s solution to exploration at extreme depths.\"}],\"text\":\"\"}', '{\"extra\":[{\"bold\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"obfuscated\":false,\"color\":\"dark_green\",\"text\":\"These masks were provided to research and military\"}],\"text\":\"\"}', '{\"extra\":[{\"bold\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"obfuscated\":false,\"color\":\"dark_green\",\"text\":\"personel, providing them with better vision and\"}],\"text\":\"\"}', '{\"extra\":[{\"bold\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"obfuscated\":false,\"color\":\"dark_green\",\"text\":\"increased oxygen supply.\"}],\"text\":\"\"}', '{\"extra\":[{\"bold\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"obfuscated\":false,\"color\":\"gray\",\"text\":\"\"}],\"text\":\"\"}', '{\"extra\":[{\"bold\":true,\"italic\":true,\"underlined\":false,\"strikethrough\":false,\"obfuscated\":false,\"color\":\"dark_purple\",\"text\":\"⋄ Deep Optic Onyx Corp ⋄\"}],\"text\":\"\"}', '{\"extra\":[{\"bold\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"obfuscated\":false,\"color\":\"gray\",\"text\":\"\"}],\"text\":\"\"}', '{\"extra\":[{\"bold\":true,\"italic\":true,\"underlined\":false,\"strikethrough\":false,\"obfuscated\":false,\"color\":\"gold\",\"text\":\"☣☣☣ Legendary Item ☣☣☣\"}],\"text\":\"\"}', '{\"extra\":[{\"bold\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"obfuscated\":false,\"color\":\"gray\",\"text\":\"\"}],\"text\":\"\"}', '{\"extra\":[{\"bold\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"obfuscated\":false,\"color\":\"dark_red\",\"text\":\"shift + right-click to equip\"}],\"text\":\"\"}']}, Enchantments: [{id: \"minecraft:respiration\", lvl: 19s}], CustomModelData: 32, AttributeModifiers: [{Name: \"EI-ID:hyrbidmaskMKII\", AttributeName: \"minecraft:generic.max_health\", Operation: 0, UUID: [I; -772512308, -891728015, -1825861133, -376386428], Slot: \"head\", Amount: 0.0d}, {Name: \"&eDefault name\", AttributeName: \"minecraft:generic.armor\", Operation: 0, UUID: [I; -1437742647, 651117270, -1845115232, -1251608100], Slot: \"head\", Amount: 3.0d}], HideFlags: 65}"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

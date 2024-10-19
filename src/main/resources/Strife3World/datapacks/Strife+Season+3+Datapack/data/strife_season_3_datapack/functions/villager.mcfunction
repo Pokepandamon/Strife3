@@ -1,0 +1,2 @@
+effect give @e[type=villager,predicate=strife_season_3_datapack:inwater] water_breathing 1 0 true
+execute as @e[type=villager,predicate=strife_season_3_datapack] run data merge entity @s {CustomName: '{"extra":[{"text":"Grumm"}]"text":""}'}

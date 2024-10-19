@@ -1,4 +1,8 @@
 {
+  "config.strife3.title": "Strife 3 Config",
+  "config.strife3.category.general": "General",
+  "config.strife3.option.admin": "Admin",
+  "config.strife3.option.admin.tooltip": "Turns off area protection (also requires permission level of 2 or higher on multiplayer)",
   "effect.strife3.morphine": "Morphine",
   "effect.strife3.heavy_diver_debuff": "Heavy Debuff",
   "effect.strife3.heavy_diver_regeneration": "Life Support",

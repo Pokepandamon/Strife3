@@ -1,0 +1,1 @@
+effect give @a[tag=drown] minecraft:instant_damage 1 0 true
