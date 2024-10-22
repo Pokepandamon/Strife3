@@ -10,7 +10,8 @@
 		"MixinServerPlayerEntity",
 		"MixinDeopCommand",
 		"MixinOpCommand",
-		"MixinCreateWorldScreen"
+		"MixinCreateWorldScreen",
+		"MixinIntegratedServerLoader"
 	],
 	"injectors": {
 		"defaultRequire": 1

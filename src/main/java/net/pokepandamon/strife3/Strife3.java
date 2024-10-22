@@ -26,6 +26,7 @@ import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.command.CommandManager;
 import net.minecraft.server.dedicated.command.OpCommand;
 import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.sound.SoundCategory;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -36,6 +37,9 @@ import net.pokepandamon.strife3.effects.MorphineEffect;
 import net.pokepandamon.strife3.items.CustomMaterialInit;
 import net.pokepandamon.strife3.items.ModItemGroups;
 import net.pokepandamon.strife3.items.ModItems;
+import net.pokepandamon.strife3.music.Ambient;
+import net.pokepandamon.strife3.music.MasterMusic;
+import net.pokepandamon.strife3.music.Song;
 import net.pokepandamon.strife3.networking.AdminBooleanRequestC2SPayload;
 import net.pokepandamon.strife3.networking.AdminBooleanRequestS2CPayload;
 import net.pokepandamon.strife3.networking.PermissionLevelRequestS2CPayload;
@@ -69,6 +73,7 @@ public class Strife3 implements ModInitializer {
 		ModItems.registerModItems();
 		CustomMaterialInit.load();
 		Strife3Config.loadConfig();
+		MasterMusic.init();
 		//Strife3WorldGenerator.generateModWorldGen();
 		protectedAreas.add(new Area(-10,-10,-10,10,-12,10));
 
@@ -120,9 +125,12 @@ public class Strife3 implements ModInitializer {
 			}
 		});
 
-		CommandRegistrationCallback.EVENT.register((dispatcher, registryAccess, environment) -> dispatcher.register(CommandManager.literal("givetesteffect")
+		CommandRegistrationCallback.EVENT.register((dispatcher, registryAccess, environment) -> dispatcher.register(CommandManager.literal("playsoundstrife")
 				.executes(context -> {
-					context.getSource().getPlayer().addStatusEffect(new StatusEffectInstance(StatusEffects.REGENERATION, 50, 0, false, false));
+					//context.getSource().getPlayer().playSoundToPlayer(Ambient.ABOVE_WATER, SoundCategory.MASTER, 1F, 1F);
+					//context.getSource().getPlayer().playSound(Ambient.ABOVE_WATER, 1F, 1F);
+					context.getSource().getWorld().playSound(null, context.getSource().getPlayer().getBlockPos(), Ambient.ABOVE_WATER, SoundCategory.MASTER);
+					LOGGER.info("But I ran this...");
 					return 1;
 				})));
 
@@ -138,6 +146,7 @@ public class Strife3 implements ModInitializer {
 					((PlayerMixinInterface) (context.getSource().getPlayer())).useMorphine();
 					return 1;
 				})));
+
 
 		/*ItemTooltipCallback.EVENT.register((stack, tooltipContext, tooltipType, tooltip) -> {
 			if (EnchantmentHelper.hasEnchantments(stack)) {

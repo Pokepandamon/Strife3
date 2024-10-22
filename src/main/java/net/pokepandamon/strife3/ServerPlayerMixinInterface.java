@@ -5,4 +5,5 @@ public interface ServerPlayerMixinInterface {
     void locationTick();
     boolean getClientAdminValue();
     void setClientAdminValue(boolean newClientAdminValue);
+    boolean inDeepOptic();
 }

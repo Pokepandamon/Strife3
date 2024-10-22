@@ -15,5 +15,6 @@ public interface PlayerMixinInterface {
     boolean anyHeavyArmorCooldown();
     boolean fullHeavyArmorCooldown();
     void locationTick();
+    String getCurrentZone();
 
 }

@@ -167,6 +167,11 @@ public abstract class MixinEntityPlayer extends LivingEntity implements PlayerMi
     public void tick(CallbackInfo ci){
         this.customPlayerTick();
     }
+
+    @Override
+    public String getCurrentZone(){
+        return this.currentZone;
+    }
     /*
     @Inject(method= "canPlaceOn", at=@At("HEAD"))
     public void canPlaceOn(BlockPos pos, Direction facing, ItemStack stack, CallbackInfoReturnable<Boolean> cir) {

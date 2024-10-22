@@ -1,5 +1,5 @@
 {
-  "type": "minecraft:overworld",
+  "type": "strife3:deep_optic_type",
   "generator": {
     "type": "minecraft:noise",
     "seed": 1234567890,
