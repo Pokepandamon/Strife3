@@ -45,6 +45,14 @@ public class ModItems {
     public static final Item KINGS_CROWN = registerItem("kings_crown", new KingsCrown("kings_crown", CustomMaterialInit.KINGS_CROWN, ArmorItem.Type.HELMET, (new Item.Settings()).maxCount(1).attributeModifiers(KingsCrown.attributeModifiersComponent)));
     public static final Item LONG_SWORD = registerItem("long_sword", new LongSword("long_sword", ToolMaterials.STONE, (new Item.Settings()).attributeModifiers(LongSword.attributeModifiersComponent).maxDamage(131)));
     public static final Item NIGHT_VISION_GOGGLES = registerItem("night_vision_goggles", new NightVisionGoggles("night_vision_goggles", CustomMaterialInit.NIGHT_VISION_GOGGLES, ArmorItem.Type.HELMET, (new Item.Settings().maxCount(1))));
+    public static final Item MEDKIT = registerItem("medkit", new Medkit("medkit", (new Item.Settings()).maxCount(1)));
+    public static final Item ETHER_TABLET = registerItem("ether_tablet", new EtherTablet("ether_tablet", (new Item.Settings()).maxCount(1)));
+    public static final Item RESISTANCE_DRUG = registerItem("resistance_drug", new ResistanceDrug("resistance_drug", (new Item.Settings()).maxCount(1)));
+    public static final Item STEEL_AXE = registerItem("steel_axe", new SteelAxe("steel_axe", ToolMaterials.IRON, (new Item.Settings()).attributeModifiers(SteelAxe.attributeModifiersComponent)));
+    public static final Item STEEL_PICKAXE = registerItem("steel_pickaxe", new SteelPickaxe("steel_pickaxe", ToolMaterials.IRON, (new Item.Settings()).attributeModifiers(SteelPickaxe.attributeModifiersComponent)));
+    public static final Item SPEED_DRUG = registerItem("speed_drug", new SpeedDrug("speed_drug", (new Item.Settings()).maxCount(1)));
+    public static final Item STRENGTH_DRUG = registerItem("strength_drug", new StrengthDrug("strength_drug", (new Item.Settings()).maxCount(1)));
+    public static final Item SUPER_DRUG = registerItem("super_drug", new SuperDrug("super_drug", (new Item.Settings()).maxCount(1)));
 
     public static void registerModItems() {
         Strife3.LOGGER.info("Registered Mod Items for " + Strife3.MOD_ID);

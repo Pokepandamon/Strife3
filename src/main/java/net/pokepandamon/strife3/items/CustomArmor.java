@@ -28,6 +28,7 @@ public class CustomArmor extends ArmorItem{
         put("heavy_divers_boots", new ArrayList<String>(){{ add("item.strife3.heavy_divers_boots.tooltip.1"); add("item.strife3.heavy_divers_boots.tooltip.2"); add("item.strife3.heavy_divers_boots.tooltip.3"); add("item.strife3.heavy_divers_boots.tooltip.4"); add("item.strife3.heavy_divers_boots.tooltip.5"); add("item.strife3.heavy_divers_boots.tooltip.6"); add("item.strife3.heavy_divers_boots.tooltip.7"); add("item.strife3.heavy_divers_boots.tooltip.8"); add("item.strife3.heavy_divers_boots.tooltip.9"); }});
         put("juggernaut", new ArrayList<String>(){{ add("item.strife3.juggernaut.tooltip.1"); add("item.strife3.juggernaut.tooltip.2"); add("item.strife3.juggernaut.tooltip.3"); add("item.strife3.juggernaut.tooltip.4"); }});
         put("kings_crown", new ArrayList<String>(){{ add("item.strife3.kings_crown.tooltip.1"); add("item.strife3.kings_crown.tooltip.2"); add("item.strife3.kings_crown.tooltip.3"); add("item.strife3.kings_crown.tooltip.4"); add("item.strife3.kings_crown.tooltip.5"); add("item.strife3.kings_crown.tooltip.6"); }});
+        put("night_vision_goggles", new ArrayList<String>(){{ add("item.strife3.night_vision_goggles.tooltip.1"); add("item.strife3.night_vision_goggles.tooltip.2"); add("item.strife3.night_vision_goggles.tooltip.3"); }});
     }};
 
     public CustomArmor(String itemType, RegistryEntry<ArmorMaterial> armorMaterial, ArmorItem.Type type, Settings settings) {

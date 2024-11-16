@@ -10,6 +10,7 @@ import net.minecraft.text.Text;
 import net.minecraft.util.Hand;
 import net.minecraft.util.TypedActionResult;
 import net.minecraft.world.World;
+import net.pokepandamon.strife3.PlayerMixinInterface;
 import net.pokepandamon.strife3.Strife3;
 import net.pokepandamon.strife3.effects.MorphineEffect;
 import net.pokepandamon.strife3.items.CustomItem;
@@ -24,7 +25,7 @@ public class Morphine extends CustomItem {
     @Override
     public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
         ItemStack itemStack = user.getStackInHand(hand);
-        if (!user.hasStatusEffect(Registries.STATUS_EFFECT.getEntry(Strife3.MORPHINE))) {
+        if (!((PlayerMixinInterface)user).onMorphine()) {
             //user.addStatusEffect(new StatusEffectInstance(Registries.STATUS_EFFECT.getEntry(Strife3.MORPHINE), 300, 0, true, true, true, new StatusEffectInstance(StatusEffects.POISON, 340,0, false, false, false)));
             user.addStatusEffect(new StatusEffectInstance(Registries.STATUS_EFFECT.getEntry(Strife3.MORPHINE), 300, 0, true, true, true));
             /*if (user instanceof ServerPlayerEntity) {

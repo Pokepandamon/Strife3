@@ -11,7 +11,12 @@ public class Ambient {
     public static SoundEvent ABOVE_WATER = SoundEvent.of(ABOVE_WATER_ID);
     public static SoundEvent ABOVE_WATER_REGISTERED = Registry.register(Registries.SOUND_EVENT, ABOVE_WATER_ID, ABOVE_WATER);*/
 
-    public static final SoundEvent ABOVE_WATER = registerSound("ambient_test");
+    public static final SoundEvent SHALLOWS = registerSound("ambient_underwater_shallows");
+    public static final SoundEvent LUSH = registerSound("ambient_underwater_lush");
+    public static final SoundEvent DEEP = registerSound("ambient_underwater_deep");
+    public static final SoundEvent DEEP_OPTIC_UNDERWATER = registerSound("ambient_underwater_deep_optic");
+    public static final SoundEvent DEEP_OPTIC_ABOVE_WATER = registerSound("ambient_above_water_deep_optic");
+    public static final SoundEvent ABOVE_WATER = registerSound("ambient_above_water");
 
     // actual registration of all the custom SoundEvents
     private static SoundEvent registerSound(String id) {

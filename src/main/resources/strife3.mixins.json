@@ -11,7 +11,14 @@
 		"MixinDeopCommand",
 		"MixinOpCommand",
 		"MixinCreateWorldScreen",
-		"MixinIntegratedServerLoader"
+		"MixinIntegratedServerLoader",
+		"MixinMusicTracker",
+		"MixinTitleScreen",
+		"MixinScreen",
+		"MixinSpashOverlay",
+		"MixinClientPlayer",
+		"MixinWorldRenderer",
+		"MixinBackgroundRenderer"
 	],
 	"injectors": {
 		"defaultRequire": 1

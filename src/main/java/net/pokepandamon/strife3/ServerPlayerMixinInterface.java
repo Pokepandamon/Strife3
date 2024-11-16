@@ -5,5 +5,9 @@ public interface ServerPlayerMixinInterface {
     void locationTick();
     boolean getClientAdminValue();
     void setClientAdminValue(boolean newClientAdminValue);
-    boolean inDeepOptic();
+    void soundTick();
+    void songTick();
+    void ambientTick();
+    void armorDeEquipTick();
+    void setSongTimer(int newTimer);
 }

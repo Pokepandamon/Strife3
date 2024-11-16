@@ -14,10 +14,8 @@ import net.pokepandamon.strife3.Strife3;
 import net.pokepandamon.strife3.items.ModItems;
 import org.spongepowered.asm.mixin.Mixin;
 
-import java.util.Collection;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
+
 import net.minecraft.client.gui.DrawContext;
 import org.spongepowered.asm.mixin.Shadow;
 
@@ -45,7 +43,8 @@ public abstract class MixinAbstractInventoryScreen<T extends ScreenHandler> exte
     private void drawStatusEffects(DrawContext context, int mouseX, int mouseY) {
         int k = this.x + this.backgroundWidth + 2;
         int l = this.width - k;
-        Collection<StatusEffectInstance> collection = this.client.player.getStatusEffects();
+        Collection<StatusEffectInstance> collection = new ArrayList<StatusEffectInstance>(this.client.player.getStatusEffects());
+        //Collection<StatusEffectInstance> collection = this.client.player.getStatusEffects();
         if(((PlayerMixinInterface)(this.client.player)).onMorphine()){
             //Strife3.LOGGER.info(String.valueOf(((PlayerMixinInterface)(this.client.player)).morphineTimer()));
             collection.removeIf(s -> s.equals(StatusEffects.POISON));
@@ -63,10 +62,57 @@ public abstract class MixinAbstractInventoryScreen<T extends ScreenHandler> exte
             collection.removeIf(s -> s.equals(StatusEffects.SLOWNESS));
             collection.removeIf(s -> s.equals(StatusEffects.WEAKNESS));
         }
-        collection.removeIf(s -> s.equals(StatusEffects.MINING_FATIGUE));
-        /*if(this.client.player.getInventory().getArmorStack(0).getItem() == ModItems.HYBRID_MASK || this.client.player.getInventory().getArmorStack(0).getItem() == ModItems.NIGHT_VISION_GOGGLES){
+        if(((PlayerMixinInterface)(this.client.player)).onMedkit()){
+            collection.removeIf(s -> s.equals(StatusEffects.REGENERATION));
+        }
+        if(((PlayerMixinInterface)(this.client.player)).onResistanceDrug()){
+            collection.removeIf(s -> s.equals(StatusEffects.RESISTANCE));
+            collection.removeIf(s -> s.equals(StatusEffects.INSTANT_HEALTH));
+            collection.removeIf(s -> s.equals(StatusEffects.WATER_BREATHING));
             collection.removeIf(s -> s.equals(StatusEffects.NIGHT_VISION));
-        }*/
+        }
+        if(((PlayerMixinInterface)(this.client.player)).speedDrugTimer() > 20*20){
+            collection.removeIf(s -> s.equals(StatusEffects.SPEED));
+            collection.removeIf(s -> s.equals(StatusEffects.DOLPHINS_GRACE));
+        }else if(((PlayerMixinInterface)(this.client.player)).onSpeedDrug()){
+            collection.removeIf(s -> s.equals(StatusEffects.NAUSEA));
+        }
+        if(((PlayerMixinInterface)(this.client.player)).strengthDrugTimer() > 30*20){
+            collection.removeIf(s -> s.equals(StatusEffects.STRENGTH));
+            collection.removeIf(s -> s.equals(StatusEffects.HASTE));
+        }else if(((PlayerMixinInterface)(this.client.player)).onStrengthDrug()){
+            collection.removeIf(s -> s.equals(StatusEffects.WEAKNESS));
+            collection.removeIf(s -> s.equals(StatusEffects.SLOWNESS));
+        }
+        if(((PlayerMixinInterface)(this.client.player)).onSuperDrug()){
+            //Strife3.LOGGER.info("Percieved Random " + ((PlayerMixinInterface)(this.client.player)).superDrugRandomChoice());
+            if(((PlayerMixinInterface)(this.client.player)).superDrugRandomChoice() == 1){
+                collection.removeIf(s -> s.equals(StatusEffects.REGENERATION));
+                collection.removeIf(s -> s.equals(StatusEffects.HEALTH_BOOST));
+                collection.removeIf(s -> s.equals(StatusEffects.SATURATION));
+                collection.removeIf(s -> s.equals(StatusEffects.DOLPHINS_GRACE));
+            }else if(((PlayerMixinInterface)(this.client.player)).superDrugRandomChoice() == 2){
+                collection.removeIf(s -> s.equals(StatusEffects.POISON));
+                collection.removeIf(s -> s.equals(StatusEffects.GLOWING));
+                collection.removeIf(s -> s.equals(StatusEffects.SLOWNESS));
+                collection.removeIf(s -> s.equals(StatusEffects.WEAKNESS));
+            }else if(((PlayerMixinInterface)(this.client.player)).superDrugRandomChoice() == 3){
+                collection.removeIf(s -> s.equals(StatusEffects.SPEED));
+                collection.removeIf(s -> s.equals(StatusEffects.HEALTH_BOOST));
+                collection.removeIf(s -> s.equals(StatusEffects.BLINDNESS));
+                collection.removeIf(s -> s.equals(StatusEffects.DOLPHINS_GRACE));
+                collection.removeIf(s -> s.equals(StatusEffects.INVISIBILITY));
+                collection.removeIf(s -> s.equals(StatusEffects.RESISTANCE));
+            }else{
+                collection.removeIf(s -> s.equals(StatusEffects.NAUSEA));
+                collection.removeIf(s -> s.equals(StatusEffects.INSTANT_HEALTH));
+                collection.removeIf(s -> s.equals(StatusEffects.WATER_BREATHING));
+            }
+        }
+        collection.removeIf(s -> s.equals(StatusEffects.MINING_FATIGUE));
+        if(this.client.player.getInventory().getArmorStack(0).getItem() == ModItems.HYBRID_MASK || this.client.player.getInventory().getArmorStack(0).getItem() == ModItems.NIGHT_VISION_GOGGLES){
+            collection.removeIf(s -> s.equals(StatusEffects.NIGHT_VISION));
+        }
         if (!collection.isEmpty() && l >= 32) {
             boolean bl = l >= 120;
             int m = 33;

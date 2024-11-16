@@ -1,0 +1,8 @@
+{
+  "variants": {
+    "facing=north": { "model": "strife3:block/radiation_station_block", "uvlock": true },
+    "facing=east":  { "model": "strife3:block/radiation_station_block", "y":  90, "uvlock": true },
+    "facing=south": { "model": "strife3:block/radiation_station_block", "y": 180, "uvlock": true },
+    "facing=west":  { "model": "strife3:block/radiation_station_block", "y": 270, "uvlock": true }
+  }
+}

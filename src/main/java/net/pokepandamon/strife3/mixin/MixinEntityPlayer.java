@@ -10,11 +10,15 @@ import net.minecraft.entity.player.PlayerAbilities;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.item.ItemStack;
+import net.minecraft.sound.SoundCategory;
+import net.minecraft.sound.SoundEvent;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.world.World;
 import net.pokepandamon.strife3.Area;
 import net.pokepandamon.strife3.PlayerMixinInterface;
+import net.pokepandamon.strife3.Strife3;
+import net.pokepandamon.strife3.Strife3Dimensions;
 import net.pokepandamon.strife3.items.ModItems;
 import org.slf4j.Logger;
 import org.spongepowered.asm.mixin.Final;
@@ -36,8 +40,17 @@ public abstract class MixinEntityPlayer extends LivingEntity implements PlayerMi
     @Shadow public abstract boolean damage(DamageSource source, float amount);
     @Shadow public abstract PlayerInventory getInventory();
 
+    @Shadow protected boolean isSubmergedInWater;
+
+    @Shadow public abstract void playSoundToPlayer(SoundEvent sound, SoundCategory category, float volume, float pitch);
+
     @Unique private int morphine = 0;
-    @Unique private int steroids = 0;
+    @Unique private int resistanceDrug = 0;
+    @Unique private int speedDrug = 0;
+    @Unique private int strengthDrug = 0;
+    @Unique private int superDrug = 0;
+    @Unique private int superDrugRandomChoice = 0;
+    @Unique private int medkit = 0;
     @Unique private boolean drowned = false;
     @Unique private int drowningTick = 15;
     @Unique private int fullHeavyArmorTick = 25;
@@ -49,13 +62,79 @@ public abstract class MixinEntityPlayer extends LivingEntity implements PlayerMi
     }
 
     @Override
+    public int speedDrugTimer(){
+        return speedDrug;
+    }
+
+    @Override
+    public boolean onSpeedDrug(){
+        return speedDrug != 0;
+    }
+
+    @Override
+    public void useSpeedDrug(){
+        this.speedDrug = 120*20 + 20*20;
+    }
+
+    @Override
+    public void speedDrugTick(){
+        if(this.onSpeedDrug()){this.speedDrug--;}
+    }
+
+    @Override
+    public int strengthDrugTimer(){
+        return strengthDrug;
+    }
+
+    @Override
+    public boolean onStrengthDrug(){
+        return strengthDrug != 0;
+    }
+
+    @Override
+    public void useStrengthDrug(){
+        this.strengthDrug = 110*20;
+    }
+
+    @Override
+    public void strengthDrugTick(){
+        if(this.onStrengthDrug()){this.strengthDrug--;}
+    }
+
+    @Override
+    public int superDrugTimer(){
+        return superDrug;
+    }
+
+    @Override
+    public boolean onSuperDrug(){
+        return superDrug != 0;
+    }
+
+    @Override
+    public void useSuperDrug(int superDrugRandomChoiceM){
+        this.superDrug = 30*20;
+        this.superDrugRandomChoice = superDrugRandomChoiceM;
+    }
+
+    @Override
+    public void superDrugTick(){
+        if(this.onSuperDrug()){this.superDrug--;}
+    }
+
+    @Override
+    public int superDrugRandomChoice(){
+        return superDrugRandomChoice;
+    }
+
+    @Override
     public int morphineTimer(){
         return morphine;
     }
 
     @Override
-    public int steroidTimer(){
-        return steroids;
+    public int resistanceDrugTimer(){
+        return resistanceDrug;
     }
 
     @Override
@@ -64,8 +143,13 @@ public abstract class MixinEntityPlayer extends LivingEntity implements PlayerMi
     }
 
     @Override
-    public boolean onSteroids(){
-        return steroids != 0;
+    public boolean onResistanceDrug(){
+        return resistanceDrug != 0;
+    }
+
+    @Override
+    public boolean onMedkit(){
+        return medkit != 0;
     }
 
     @Override
@@ -74,8 +158,13 @@ public abstract class MixinEntityPlayer extends LivingEntity implements PlayerMi
     }
 
     @Override
-    public void useSteroids(){
-        this.morphine = 345;
+    public void useResistanceDrug(){
+        this.resistanceDrug = 120*20;
+    }
+
+    @Override
+    public void useMedkit(){
+        this.medkit = 345;
     }
 
     @Override
@@ -84,16 +173,27 @@ public abstract class MixinEntityPlayer extends LivingEntity implements PlayerMi
     }
 
     @Override
-    public void steroidsTick(){
-        if(this.onSteroids()){this.steroids--;}
+    public void resistanceDrugTick(){
+        if(this.onResistanceDrug()){this.resistanceDrug--;}
+    }
+
+    @Override
+    public void medkitTick(){
+        if(this.onResistanceDrug()){this.medkit--;}
     }
 
     @Override
     public void customPlayerTick() {
         //LOGGER.info(String.valueOf(this.morphineTimer()));
+        //Strife3.LOGGER.info("Super Tick " + this.superDrugTimer() + " | Random Choice: " + this.superDrugRandomChoice + " | Random Choice Actual " + this.superDrugRandomChoice());
+        //Strife3.LOGGER.info("Morphine: " + this.morphineTimer() + " | Resistance Drug: " + this.resistanceDrugTimer() + " | Speed Drug: " + this.speedDrugTimer() + " | Strength Drug: " + this.strengthDrugTimer() + " | Super Drug: " + this.superDrugTimer());
         this.drowningTick();
-        this.steroidsTick();
+        this.resistanceDrugTick();
         this.morphineTick();
+        this.medkitTick();
+        this.speedDrugTick();
+        this.strengthDrugTick();
+        this.superDrugTick();
         this.locationTick();
     }
 
@@ -151,15 +251,24 @@ public abstract class MixinEntityPlayer extends LivingEntity implements PlayerMi
     }
 
     @Override
+    public boolean inDeepOptic(){
+        return this.getWorld().getRegistryKey().equals(Strife3Dimensions.DEEP_OPTIC_DIM_LEVEL_KEY);
+    }
+
+    @Override
     public void locationTick(){
-        if(((Double)this.getY()).intValue() > 150){
-            currentZone = "Shallows";
-        }else if(((Double)this.getY()).intValue() > 100){
-            currentZone = "Lush";
-            this.addStatusEffect(new StatusEffectInstance(StatusEffects.MINING_FATIGUE, 2,0,true,false));
-        }else{
-            currentZone = "Depths";
-            this.addStatusEffect(new StatusEffectInstance(StatusEffects.MINING_FATIGUE, 2,1,true,false));
+        if(this.inDeepOptic()){
+            currentZone = "DeepOptic";
+        }else {
+            if (((Double) this.getY()).intValue() > 150) {
+                currentZone = "Shallows";
+            } else if (((Double) this.getY()).intValue() > 100) {
+                currentZone = "Lush";
+                this.addStatusEffect(new StatusEffectInstance(StatusEffects.MINING_FATIGUE, 2, 0, true, false));
+            } else {
+                currentZone = "Depths";
+                this.addStatusEffect(new StatusEffectInstance(StatusEffects.MINING_FATIGUE, 2, 1, true, false));
+            }
         }
     }
 

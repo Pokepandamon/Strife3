@@ -9,6 +9,7 @@ import net.minecraft.registry.Registry;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 import net.pokepandamon.strife3.Strife3;
+import net.pokepandamon.strife3.block.ModBlocks;
 
 public class ModItemGroups {
     public static void registerItemGroups() {
@@ -43,5 +44,16 @@ public class ModItemGroups {
                 entries.add(ModItems.JUGGERNAUT);
                 entries.add(ModItems.KINGS_CROWN);
                 entries.add(ModItems.LONG_SWORD);
+                entries.add(ModItems.MEDKIT);
+                entries.add(ModItems.NIGHT_VISION_GOGGLES);
+                entries.add(ModItems.RESISTANCE_DRUG);
+                entries.add(ModItems.STEEL_AXE);
+                entries.add(ModItems.STEEL_PICKAXE);
+                entries.add(ModItems.SPEED_DRUG);
+                entries.add(ModItems.STRENGTH_DRUG);
+                entries.add(ModItems.SUPER_DRUG);
+                entries.add(ModBlocks.radiationStation);
+                entries.add(ModBlocks.boneKelpFruit);
+                entries.add(ModBlocks.boneKelp);
             }).build());
 }

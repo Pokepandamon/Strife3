@@ -1,207 +1,212 @@
 {
-
-  "ambient_test": {
-    "subtitle": "sound.strife3.ambient.underwater.shallows",
-    "sounds": [
-      "strife3:above_water"
-    ]
-  },
   "ambient_underwater_shallows": {
-    "subtitle": "sound.strife3.ambient.underwater.shallows",
     "sounds": [
-      "strife3:ambient/shallows"
+      {
+        "name": "strife3:ambient/shallows",
+        "stream": true
+      }
     ]
   },
   "ambient_underwater_lush": {
-    "subtitle": "sound.strife3.ambient.underwater.lush",
     "sounds": [
-      "strife3:ambient/lush"
+      {
+        "name": "strife3:ambient/lush",
+        "stream": true
+      }
     ]
   },
   "ambient_underwater_deep": {
-    "subtitle": "sound.strife3.ambient.underwater.deep",
     "sounds": [
-      "strife3:ambient/deep"
+      {
+        "name": "strife3:ambient/deep",
+        "stream": true
+      }
     ]
   },
   "ambient_underwater_deep_optic": {
-    "subtitle": "sound.strife3.ambient.underwater.deep_optic",
     "sounds": [
-      "strife3:ambient/deep_optic_underwater"
+      {
+        "name": "strife3:ambient/deep_optic_underwater",
+        "stream": true
+      }
     ]
   },
   "ambient_above_water_deep_optic": {
-    "subtitle": "sound.strife3.ambient.above_water.deep_optic",
     "sounds": [
-      "strife3:ambient/deep_optic_above_water"
+      {
+        "name": "strife3:ambient/deep_optic_above_water",
+        "stream": true
+      }
     ]
   },
   "ambient_above_water": {
-    "subtitle": "sound.strife3.ambient.above_water",
     "sounds": [
-      "strife3:ambient/above_water"
+      {
+        "name": "strife3:ambient/above_water",
+        "stream": true
+      }
     ]
   },
-  "song_shallows1": {
-    "subtitle": "sound.strife3.song.shallows1",
+  "song_shallows": {
     "sounds": [
-      "strife3:song/shallows1"
+      {
+        "name": "strife3:song/shallows1",
+        "stream": true
+      },
+      {
+        "name": "strife3:song/shallows2",
+        "stream": true
+      },
+      {
+        "name": "strife3:song/shallows3",
+        "stream": true
+      },
+      {
+        "name": "strife3:song/shallows4",
+        "stream": true
+      },
+      {
+        "name": "strife3:song/shallows5",
+        "stream": true
+      },
+      {
+        "name": "strife3:song/shallows6",
+        "stream": true
+      },
+      {
+        "name": "strife3:song/shallows7",
+        "stream": true
+      },
+      {
+        "name": "strife3:song/shallows8",
+        "stream": true
+      }
     ]
   },
-  "song_shallows2": {
-    "subtitle": "sound.strife3.song.shallows2",
+  "song_lush": {
     "sounds": [
-      "strife3:song/shallows2"
+      {
+        "name": "strife3:song/lush1",
+        "stream": true
+      },
+      {
+        "name": "strife3:song/lush2",
+        "stream": true
+      },
+      {
+        "name": "strife3:song/lush3",
+        "stream": true
+      },
+      {
+        "name": "strife3:song/lush4",
+        "stream": true
+      },
+      {
+        "name": "strife3:song/lush5",
+        "stream": true
+      },
+      {
+        "name": "strife3:song/lush6",
+        "stream": true
+      },
+      {
+        "name": "strife3:song/lush7",
+        "stream": true
+      }
     ]
   },
-  "song_shallows3": {
-    "subtitle": "sound.strife3.song.shallows3",
+  "song_deep": {
     "sounds": [
-      "strife3:song/shallows3"
-    ]
-  },
-  "song_shallows4": {
-    "subtitle": "sound.strife3.song.shallows4",
-    "sounds": [
-      "strife3:song/shallows4"
-    ]
-  },
-  "song_shallows5": {
-    "subtitle": "sound.strife3.song.shallows5",
-    "sounds": [
-      "strife3:song/shallows5"
-    ]
-  },
-  "song_shallows6": {
-    "subtitle": "sound.strife3.song.shallows6",
-    "sounds": [
-      "strife3:song/shallows6"
-    ]
-  },
-  "song_shallows7": {
-    "subtitle": "sound.strife3.song.shallows7",
-    "sounds": [
-      "strife3:song/shallows7"
-    ]
-  },
-  "song_shallows8": {
-    "subtitle": "sound.strife3.song.shallows8",
-    "sounds": [
-      "strife3:song/shallows8"
-    ]
-  },
-  "song_lush1": {
-    "subtitle": "sound.strife3.song.lush1",
-    "sounds": [
-      "strife3:song/lush1"
-    ]
-  },
-  "song_lush2": {
-    "subtitle": "sound.strife3.song.lush2",
-    "sounds": [
-      "strife3:song/lush2"
-    ]
-  },
-  "song_lush3": {
-    "subtitle": "sound.strife3.song.lush3",
-    "sounds": [
-      "strife3:song/lush3"
-    ]
-  },
-  "song_lush4": {
-    "subtitle": "sound.strife3.song.lush4",
-    "sounds": [
-      "strife3:song/lush4"
-    ]
-  },
-  "song_lush5": {
-    "subtitle": "sound.strife3.song.lush5",
-    "sounds": [
-      "strife3:song/lush5"
-    ]
-  },
-  "song_lush6": {
-    "subtitle": "sound.strife3.song.lush6",
-    "sounds": [
-      "strife3:song/lush6"
-    ]
-  },
-  "song_lush7": {
-    "subtitle": "sound.strife3.song.lush7",
-    "sounds": [
-      "strife3:song/lush7"
-    ]
-  },
-  "song_deep1": {
-    "subtitle": "sound.strife3.song.deep1",
-    "sounds": [
-      "strife3:song/deep1"
-    ]
-  },
-  "song_deep2": {
-    "subtitle": "sound.strife3.song.deep2",
-    "sounds": [
-      "strife3:song/deep2"
-    ]
-  },
-  "song_deep3": {
-    "subtitle": "sound.strife3.song.deep3",
-    "sounds": [
-      "strife3:song/deep3"
-    ]
-  },
-  "song_deep4": {
-    "subtitle": "sound.strife3.song.deep4",
-    "sounds": [
-      "strife3:song/deep4"
-    ]
-  },
-  "song_deep5": {
-    "subtitle": "sound.strife3.song.deep5",
-    "sounds": [
-      "strife3:song/deep5"
-    ]
-  },
-  "song_deep6": {
-    "subtitle": "sound.strife3.song.deep6",
-    "sounds": [
-      "strife3:song/deep6"
-    ]
-  },
-  "song_deep7": {
-    "subtitle": "sound.strife3.song.deep7",
-    "sounds": [
-      "strife3:song/deep7"
+      {
+        "name": "strife3:song/deep1",
+        "stream": true
+      },
+      {
+        "name": "strife3:song/deep2",
+        "stream": true
+      },
+      {
+        "name": "strife3:song/deep3",
+        "stream": true
+      },
+      {
+        "name": "strife3:song/deep4",
+        "stream": true
+      },
+      {
+        "name": "strife3:song/deep5",
+        "stream": true
+      },
+      {
+        "name": "strife3:song/deep6",
+        "stream": true
+      },
+      {
+        "name": "strife3:song/deep7",
+        "stream": true
+      }
     ]
   },
   "song_surface": {
     "subtitle": "sound.strife3.song.surface",
     "sounds": [
-      "strife3:song/surface"
+      {
+        "name": "strife3:song/surface",
+        "stream": true
+      }
     ]
   },
   "song_victory1": {
     "subtitle": "sound.strife3.song.victory1",
     "sounds": [
-      "strife3:song/victory1"
+      {
+        "name": "strife3:song/victory1",
+        "stream": true
+      }
     ]
   },
   "song_victory2": {
     "subtitle": "sound.strife3.song.victory2",
     "sounds": [
-      "strife3:song/victory2"
+      {
+        "name": "strife3:song/victory2",
+        "stream": true
+      }
     ]
   },
   "song_deep_optic": {
     "subtitle": "sound.strife3.song.deep_optic",
     "sounds": [
-      "strife3:song/deep_optic"
+      {
+        "name": "strife3:song/deep_optic",
+        "stream": true
+      }
     ]
   },
   "song_boss_battle": {
     "subtitle": "sound.strife3.song.boss_battle",
     "sounds": [
-      "strife3:song/boss_battle"
+      {
+        "name": "strife3:song/boss_battle",
+        "stream": true
+      }
+    ]
+  },
+  "ether_tablet": {
+    "subtitle": "item.strife3.ether_tablet.sound_effect",
+    "sounds": [
+      {
+        "name": "minecraft:block/end_portal/endportal"
+      }
+    ]
+  },
+  "elevator": {
+    "subtitle": "sound.strife3.elevator",
+    "sounds": [
+      {
+        "name": "strife3:song/elevator",
+        "stream": true
+      }
     ]
   }
 }

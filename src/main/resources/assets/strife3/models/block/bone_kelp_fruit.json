@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "strife3:block/bone_kelp_fruit"
+  }
+}

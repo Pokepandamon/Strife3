@@ -19,6 +19,7 @@ public class CustomPickaxe extends PickaxeItem {
     // Telling the tooltip setter which tooltips to fetch
     private static Map<String, ArrayList<String>> itemTooltips = new HashMap<String, ArrayList<String>> () {{
         put("alloy_pickaxe", new ArrayList<String>(){{ add("item.strife3.alloy_pickaxe.tooltip.1"); add("item.strife3.alloy_pickaxe.tooltip.2"); add("item.strife3.alloy_pickaxe.tooltip.3"); add("item.strife3.alloy_pickaxe.tooltip.4"); add("item.strife3.alloy_pickaxe.tooltip.5"); add("item.strife3.alloy_pickaxe.tooltip.6"); add("item.strife3.alloy_pickaxe.tooltip.7"); add("item.strife3.alloy_pickaxe.tooltip.8"); }});
+        put("steel_pickaxe", new ArrayList<String>(){{ add("item.strife3.steel_pickaxe.tooltip.1"); add("item.strife3.steel_pickaxe.tooltip.2"); add("item.strife3.steel_pickaxe.tooltip.3"); add("item.strife3.steel_pickaxe.tooltip.4"); add("item.strife3.steel_pickaxe.tooltip.5"); add("item.strife3.steel_pickaxe.tooltip.6"); }});
     }};
 
     public CustomPickaxe(String itemType, ToolMaterials toolMaterials, Settings settings) {
