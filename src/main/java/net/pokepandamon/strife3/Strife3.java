@@ -3,6 +3,7 @@ package net.pokepandamon.strife3;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.ModInitializer;
 
+import net.fabricmc.fabric.api.client.rendering.v1.ColorProviderRegistry;
 import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerWorldEvents;
@@ -27,6 +28,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
+import net.minecraft.entity.mob.DrownedEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -111,12 +113,24 @@ public class Strife3 implements ModInitializer {
 		MasterMusic.init();
 		Strife3Entities.registerStrife3Entities();
 		FabricDefaultAttributeRegistry.register(Strife3Entities.GREATER_VERLUER, GreaterVerluerEntity.createGreaterVerluer());
+		//FabricDefaultAttributeRegistry.register(Strife3Entities.GREATER_VERLUER, DrownedEntity.createDrownedAttributes());
 		//Strife3WorldGenerator.generateModWorldGen();
 		protectedAreas.add(starterIsland1);
 		protectedAreas.add(starterIsland2);
 		protectedAreas.add(deepOpticEntrance);
 		protectedAreas.add(netherideFactory);
 		protectedAreas.add(deepOpticChanger);
+
+		ColorProviderRegistry.BLOCK.register((state, world, pos, tintIndex) ->
+						0x62C744, // Default color if biome info isn't available
+				ModBlocks.kelpGrowth
+		);
+
+		// You can also register the item color provider if needed
+		ColorProviderRegistry.ITEM.register((stack, tintIndex) ->
+						0x62C744, // Default color for inventory item if you want it green
+				ModBlocks.kelpGrowth
+		);
 		//Registry.register(Registry.BIOME, CUSTOM_BIOME_KEY.getValue(), ModBiomes.createCustomBiome());
 
 		CommandRegistrationCallback.EVENT.register((dispatcher, registryAccess, environment) -> dispatcher.register(CommandManager.literal("depths")

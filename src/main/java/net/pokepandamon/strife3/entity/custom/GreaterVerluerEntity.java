@@ -1,12 +1,20 @@
 package net.pokepandamon.strife3.entity.custom;
 
 import net.minecraft.entity.AnimationState;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.ai.goal.Goal;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
+import net.minecraft.entity.attribute.DefaultAttributeRegistry;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.mob.DrownedEntity;
+import net.minecraft.entity.mob.GhastEntity;
+import net.minecraft.entity.mob.HostileEntity;
 import net.minecraft.entity.mob.MobEntity;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
+import net.pokepandamon.strife3.Strife3;
 
 public class GreaterVerluerEntity extends DrownedEntity {
     //protected final SwimNavigation waterNavigation;
@@ -51,10 +59,14 @@ public class GreaterVerluerEntity extends DrownedEntity {
     }
 
     public static DefaultAttributeContainer.Builder createGreaterVerluer(){
-        return MobEntity.createMobAttributes()
+        return HostileEntity.createHostileAttributes()
                 .add(EntityAttributes.GENERIC_ARMOR, 10)
                 .add(EntityAttributes.GENERIC_MAX_HEALTH, 200)
-                .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 4);
+                .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 4)
+                .add(EntityAttributes.GENERIC_STEP_HEIGHT, 1)
+                .add(EntityAttributes.GENERIC_FOLLOW_RANGE, (double) 35.0F)
+                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, (double) 0.23F)
+                .add(EntityAttributes.ZOMBIE_SPAWN_REINFORCEMENTS);
     }
 
     @Override
@@ -62,7 +74,7 @@ public class GreaterVerluerEntity extends DrownedEntity {
         return air;
     }
 
-    /*private void dashAttack(LivingEntity target){
+    private void dashAttack(LivingEntity target){
         // Calculate direction towards the target
         Vec3d direction = new Vec3d(
                 target.getX() - this.getX(),
@@ -74,9 +86,10 @@ public class GreaterVerluerEntity extends DrownedEntity {
         this.setVelocity(direction.multiply(1.5)); // Adjust speed as needed
         this.velocityModified = true;
         this.dashCooldown = 100;
-    }*/
+        Strife3.LOGGER.info("DASH!");
+    }
 
-   /* public static class DashAttackGoal extends Goal {
+   public static class DashAttackGoal extends Goal {
         private final GreaterVerluerEntity entity;
         private final double speed;
 
@@ -98,7 +111,7 @@ public class GreaterVerluerEntity extends DrownedEntity {
         public void start() {
             entity.dashAttack(entity.getTarget());
         }
-    }*/
+    }
 
     /*public void updateSwimming() {
         if (!this.getWorld().isClient) {

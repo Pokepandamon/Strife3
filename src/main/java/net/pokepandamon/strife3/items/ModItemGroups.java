@@ -55,5 +55,8 @@ public class ModItemGroups {
                 entries.add(ModBlocks.radiationStation);
                 entries.add(ModBlocks.boneKelpFruit);
                 entries.add(ModBlocks.boneKelp);
+                entries.add(ModBlocks.kelpBlock);
+                entries.add(ModBlocks.kelpFruit);
+                entries.add(ModBlocks.kelpGrowth);
             }).build());
 }
