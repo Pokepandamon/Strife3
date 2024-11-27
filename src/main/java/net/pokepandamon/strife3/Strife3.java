@@ -1,5 +1,9 @@
 package net.pokepandamon.strife3;
 
+import com.mojang.brigadier.Command;
+import com.mojang.brigadier.arguments.StringArgumentType;
+import com.mojang.brigadier.builder.LiteralArgumentBuilder;
+import com.mojang.brigadier.builder.RequiredArgumentBuilder;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.ModInitializer;
 
@@ -23,12 +27,16 @@ import net.minecraft.client.render.GameRenderer;
 import net.minecraft.client.render.LightmapTextureManager;
 import net.minecraft.client.sound.AmbientSoundLoops;
 import net.minecraft.client.sound.SoundManager;
+import net.minecraft.command.argument.BlockPosArgumentType;
+import net.minecraft.command.argument.BlockPredicateArgumentType;
+import net.minecraft.command.argument.BlockStateArgumentType;
 import net.minecraft.command.argument.EntityArgumentType;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.mob.DrownedEntity;
+import net.minecraft.entity.mob.ShulkerEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -39,6 +47,8 @@ import net.minecraft.registry.Registry;
 import net.minecraft.registry.RegistryKeys;
 import net.minecraft.registry.tag.TagKey;
 import net.minecraft.server.command.CommandManager;
+import net.minecraft.server.command.FillCommand;
+import net.minecraft.server.command.ServerCommandSource;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
@@ -47,6 +57,7 @@ import net.minecraft.util.Formatting;
 import net.minecraft.util.Hand;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.TypedActionResult;
+import net.minecraft.util.math.BlockBox;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.PersistentStateManager;
 import net.minecraft.world.World;
@@ -67,6 +78,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
+import java.util.function.Predicate;
 
 public class Strife3 implements ModInitializer {
 	public static final String MOD_ID = "strife3";
@@ -89,6 +101,7 @@ public class Strife3 implements ModInitializer {
 	public static final Area deepOpticEntrance = new Area(-575,11,296,-540,59,343);
 	public static final Area netherideFactory = new Area(509,9,-126,574,77,-31);
 	public static final Area deepOpticChanger = new Area(-430, 4, 264, -391,31, 338);
+	public static ArrayList<Strife3Doors> doors = new ArrayList<>();
 
 	static {
 		MORPHINE = Registry.register(Registries.STATUS_EFFECT, Identifier.of(MOD_ID, "morphine"), new MorphineEffect());
@@ -166,6 +179,52 @@ public class Strife3 implements ModInitializer {
 					return 1;
 				}))));
 
+		CommandRegistrationCallback.EVENT.register((dispatcher, registryAccess, environment) -> dispatcher.register(CommandManager.literal("door")
+				.requires(source -> source.hasPermissionLevel(2))
+				.then(CommandManager.argument("from1", BlockPosArgumentType.blockPos())
+				.then(CommandManager.argument("to1", BlockPosArgumentType.blockPos())
+				.then(CommandManager.argument("from2", BlockPosArgumentType.blockPos())
+				.then(CommandManager.argument("to2", BlockPosArgumentType.blockPos())
+				.then(CommandManager.argument("identifier", StringArgumentType.string())
+						.executes((context -> {
+							Area initialDoorPos = new Area(BlockPosArgumentType.getLoadedBlockPos(context, "from1"), BlockPosArgumentType.getLoadedBlockPos(context, "to1"));
+							Area endDoorPos = new Area(BlockPosArgumentType.getLoadedBlockPos(context, "from2"), BlockPosArgumentType.getLoadedBlockPos(context, "to2"));
+							doors.add(new Strife3Doors(initialDoorPos, endDoorPos, context.getSource().getWorld(), StringArgumentType.getString(context, "identifier")));
+							context.getSource().sendFeedback(() -> Text.literal("Created door " + StringArgumentType.getString(context, "identifier")), true);
+							return 1;
+						})))))))));
+
+		CommandRegistrationCallback.EVENT.register((dispatcher, registryAccess, environment) -> dispatcher.register(CommandManager.literal("open")
+				.requires(source -> source.hasPermissionLevel(2))
+				.then(CommandManager.argument("identifier", StringArgumentType.string())
+				.executes(context -> {
+					String result = "";
+					for(Strife3Doors door : doors){
+						if(StringArgumentType.getString(context, "identifier").equals(door.getIdentifier())) {
+							door.open();
+							if(result.isEmpty()){
+								result = "Opened " + StringArgumentType.getString(context, "identifier");
+							}
+						}
+						//Strife3.LOGGER.info(door.getBlockStateArray());
+					}
+
+					if(result.isEmpty()){
+						result = "No door found";
+					}
+
+					String finalResult = result;
+
+					context.getSource().sendFeedback(() -> Text.literal(finalResult), true);
+					return 1;
+				}))));
+
+		/*dispatcher.register((LiteralArgumentBuilder)((LiteralArgumentBuilder)CommandManager.literal("fill")
+				.requires((source) -> source.hasPermissionLevel(2)))
+				.then(CommandManager.argument("from", BlockPosArgumentType.blockPos())
+						.then(CommandManager.argument("to", BlockPosArgumentType.blockPos())
+								.then(((RequiredArgumentBuilder)((RequiredArgumentBuilder)((RequiredArgumentBuilder)((RequiredArgumentBuilder)((RequiredArgumentBuilder)CommandManager.argument("block", BlockStateArgumentType.blockState(commandRegistryAccess))
+										.executes((context) -> execute((ServerCommandSource)context.getSource(), BlockBox.create(BlockPosArgumentType.getLoadedBlockPos(context, "from"), BlockPosArgumentType.getLoadedBlockPos(context, "to")), BlockStateArgumentType.getBlockState(context, "block"), FillCommand.Mode.REPLACE, (Predicate)null))).then(((LiteralArgumentBuilder)CommandManager.literal("replace").executes((context) -> execute((ServerCommandSource)context.getSource(), BlockBox.create(BlockPosArgumentType.getLoadedBlockPos(context, "from"), BlockPosArgumentType.getLoadedBlockPos(context, "to")), BlockStateArgumentType.getBlockState(context, "block"), FillCommand.Mode.REPLACE, (Predicate)null))).then(CommandManager.argument("filter", BlockPredicateArgumentType.blockPredicate(commandRegistryAccess)).executes((context) -> execute((ServerCommandSource)context.getSource(), BlockBox.create(BlockPosArgumentType.getLoadedBlockPos(context, "from"), BlockPosArgumentType.getLoadedBlockPos(context, "to")), BlockStateArgumentType.getBlockState(context, "block"), FillCommand.Mode.REPLACE, BlockPredicateArgumentType.getBlockPredicate(context, "filter")))))).then(CommandManager.literal("keep").executes((context) -> execute((ServerCommandSource)context.getSource(), BlockBox.create(BlockPosArgumentType.getLoadedBlockPos(context, "from"), BlockPosArgumentType.getLoadedBlockPos(context, "to")), BlockStateArgumentType.getBlockState(context, "block"), FillCommand.Mode.REPLACE, (pos) -> pos.getWorld().isAir(pos.getBlockPos()))))).then(CommandManager.literal("outline").executes((context) -> execute((ServerCommandSource)context.getSource(), BlockBox.create(BlockPosArgumentType.getLoadedBlockPos(context, "from"), BlockPosArgumentType.getLoadedBlockPos(context, "to")), BlockStateArgumentType.getBlockState(context, "block"), FillCommand.Mode.OUTLINE, (Predicate)null)))).then(CommandManager.literal("hollow").executes((context) -> execute((ServerCommandSource)context.getSource(), BlockBox.create(BlockPosArgumentType.getLoadedBlockPos(context, "from"), BlockPosArgumentType.getLoadedBlockPos(context, "to")), BlockStateArgumentType.getBlockState(context, "block"), FillCommand.Mode.HOLLOW, (Predicate)null)))).then(CommandManager.literal("destroy").executes((context) -> execute((ServerCommandSource)context.getSource(), BlockBox.create(BlockPosArgumentType.getLoadedBlockPos(context, "from"), BlockPosArgumentType.getLoadedBlockPos(context, "to")), BlockStateArgumentType.getBlockState(context, "block"), FillCommand.Mode.DESTROY, (Predicate)null)))))));*/
 		PlayerBlockBreakEvents.BEFORE.register(this::onBlockBreak);
 
 		//Registry.register(Registry.SOUND_EVENT, CUSTOM_MUSIC, CUSTOM_MUSIC_EVENT);

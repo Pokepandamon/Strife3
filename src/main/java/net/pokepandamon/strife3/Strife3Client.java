@@ -29,6 +29,7 @@ import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.hit.EntityHitResult;
 import net.minecraft.world.World;
 import net.pokepandamon.strife3.entity.Strife3Entities;
+import net.pokepandamon.strife3.entity.client.BlockEntityRenderer;
 import net.pokepandamon.strife3.entity.client.GreaterVerluerModel;
 import net.pokepandamon.strife3.entity.client.GreaterVerluerRenderer;
 import net.pokepandamon.strife3.entity.client.Strife3ModelLayers;
@@ -63,6 +64,7 @@ public class Strife3Client implements ClientModInitializer {
         });
 
         EntityRendererRegistry.register(Strife3Entities.GREATER_VERLUER, GreaterVerluerRenderer::new);
+        EntityRendererRegistry.register(Strife3Entities.BLOCK_ENTITY, BlockEntityRenderer::new);
         EntityModelLayerRegistry.registerModelLayer(Strife3ModelLayers.GREATER_VERLUER, GreaterVerluerModel::getTexturedModelData);
     }
 
