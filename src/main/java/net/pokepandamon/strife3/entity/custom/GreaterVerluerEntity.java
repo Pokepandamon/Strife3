@@ -16,6 +16,8 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import net.pokepandamon.strife3.Strife3;
 
+import java.util.EnumSet;
+
 public class GreaterVerluerEntity extends DrownedEntity {
     //protected final SwimNavigation waterNavigation;
     //protected final MobNavigation landNavigation;
@@ -47,13 +49,14 @@ public class GreaterVerluerEntity extends DrownedEntity {
             if (dashCooldown > 0) {
                 dashCooldown--;
             }
+            Strife3.LOGGER.info("" + dashCooldown);
         }
     }
 
     @Override
     protected void initGoals(){
         super.initGoals();
-        //this.goalSelector.add(1, new DashAttackGoal(this, 1.0));
+        this.goalSelector.add(1, new DashAttackGoal(this));
         //this.goalSelector.add(2, new FollowPlayerGoal(this, 1.2)); // Custom goal to follow player
 
     }
@@ -64,8 +67,8 @@ public class GreaterVerluerEntity extends DrownedEntity {
                 .add(EntityAttributes.GENERIC_MAX_HEALTH, 200)
                 .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 4)
                 .add(EntityAttributes.GENERIC_STEP_HEIGHT, 1)
-                .add(EntityAttributes.GENERIC_FOLLOW_RANGE, (double) 35.0F)
-                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, (double) 0.23F)
+                .add(EntityAttributes.GENERIC_FOLLOW_RANGE, (double) 100.0F)
+                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, (double) 1.1F)
                 .add(EntityAttributes.ZOMBIE_SPAWN_REINFORCEMENTS);
     }
 
@@ -74,7 +77,7 @@ public class GreaterVerluerEntity extends DrownedEntity {
         return air;
     }
 
-    private void dashAttack(LivingEntity target){
+    /*private void dashAttack(LivingEntity target){
         // Calculate direction towards the target
         Vec3d direction = new Vec3d(
                 target.getX() - this.getX(),
@@ -87,9 +90,18 @@ public class GreaterVerluerEntity extends DrownedEntity {
         this.velocityModified = true;
         this.dashCooldown = 100;
         Strife3.LOGGER.info("DASH!");
+    }*/
+
+    public void useDash(){
+        this.dashCooldown = 1000;
+        this.noClip = true;
     }
 
-   public static class DashAttackGoal extends Goal {
+    public boolean onDashCooldown(){
+        return this.dashCooldown > 0;
+    }
+
+/*   public static class DashAttackGoal extends Goal {
         private final GreaterVerluerEntity entity;
         private final double speed;
 
@@ -111,7 +123,71 @@ public class GreaterVerluerEntity extends DrownedEntity {
         public void start() {
             entity.dashAttack(entity.getTarget());
         }
+    }*/
+
+    public class DashAttackGoal extends Goal {
+        private final GreaterVerluerEntity entity;
+        private LivingEntity target;
+        private boolean dashed = false;
+        //private int cooldown;
+
+        public DashAttackGoal(GreaterVerluerEntity entity) {
+            this.entity = entity;
+            this.setControls(EnumSet.of(Control.MOVE, Control.LOOK));
+        }
+
+        @Override
+        public boolean canStart() {
+            this.target = this.entity.getTarget();
+            return this.target != null && this.entity.squaredDistanceTo(this.target) > 4.0D && !this.entity.onDashCooldown(); // Start if target is within a reasonable range.
+        }
+
+        @Override
+        public void start() {
+            //this.cooldown = 20; // Initial cooldown.
+            this.entity.useDash();
+            //this.entity.getNavigation().stop();
+        }
+
+        @Override
+        public void stop() {
+            this.target = null;
+            this.entity.noClip = false;
+        }
+
+        @Override
+        public boolean shouldContinue() {
+            return !this.dashed; // Continue if target is still within range.
+        }
+
+        @Override
+        public void tick() {
+            /*if (this.cooldown > 0) {
+                this.cooldown--;
+                return;
+            }*/
+
+            if (this.target != null) {
+                double dx = this.target.getX() - this.entity.getX();
+                double dy = this.target.getY() - this.entity.getY();
+                double dz = this.target.getZ() - this.entity.getZ();
+                double distance = Math.sqrt(dx * dx + dy * dy + dz * dz);
+
+                if (distance > 0) {
+                    double speed = 1.5; // Dash speed.
+                    this.entity.setVelocity(dx / distance * speed, dy / distance * speed, dz / distance * speed);
+                    this.entity.velocityModified = true; // Ensure velocity is applied.
+                    //this.cooldown = 40; // Set cooldown after a dash.
+
+
+                }
+            }
+            this.entity.getNavigation().startMovingTo(this.target, this.entity.speed);
+
+            this.dashed = true;
+        }
     }
+
 
     /*public void updateSwimming() {
         if (!this.getWorld().isClient) {
@@ -134,4 +210,5 @@ public class GreaterVerluerEntity extends DrownedEntity {
             return livingEntity != null && livingEntity.isTouchingWater();
         }
     }*/
+
 }

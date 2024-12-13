@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "strife3:block/deep_horn_coral_wall_fan",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "strife3:block/deep_horn_coral_wall_fan"
+    },
+    "facing=south": {
+      "model": "strife3:block/deep_horn_coral_wall_fan",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "strife3:block/deep_horn_coral_wall_fan",
+      "y": 270
+    }
+  }
+}

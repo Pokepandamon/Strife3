@@ -50,6 +50,7 @@ public class DiversMask extends CustomArmor implements GeoItem {
     public boolean onStackClicked(ItemStack stack, Slot slot, ClickType clickType, PlayerEntity player){
         stack.addEnchantment(player.getWorld().getRegistryManager().get(RegistryKeys.ENCHANTMENT).getEntry(RESPIRATION).get(), 7);
         stack.set(DataComponentTypes.ENCHANTMENTS, stack.getEnchantments().withShowInTooltip(false));
+        stack.set(DataComponentTypes.ENCHANTMENT_GLINT_OVERRIDE, false);
         return false;
     }
 

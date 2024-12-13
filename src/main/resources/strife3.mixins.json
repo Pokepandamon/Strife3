@@ -18,7 +18,8 @@
 		"MixinSpashOverlay",
 		"MixinClientPlayer",
 		"MixinWorldRenderer",
-		"MixinBackgroundRenderer"
+		"MixinBackgroundRenderer",
+		"MixinLootableInventory"
 	],
 	"injectors": {
 		"defaultRequire": 1

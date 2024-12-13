@@ -29,6 +29,7 @@ public class SteelPickaxe extends CustomPickaxe {
     public boolean onStackClicked(ItemStack stack, Slot slot, ClickType clickType, PlayerEntity player){
         stack.addEnchantment(player.getWorld().getRegistryManager().get(RegistryKeys.ENCHANTMENT).getEntry(EFFICIENCY).get(), 1);
         stack.set(DataComponentTypes.ENCHANTMENTS, stack.getEnchantments().withShowInTooltip(false));
+        stack.set(DataComponentTypes.ENCHANTMENT_GLINT_OVERRIDE, false);
         /*stack.addEnchantment(UNBREAKING, 4);
         stack.addEnchantment(Enchantments.UNBREAKING, 1);
         stack.addEnchantment(Registries.ENCHANTMENT_EFFECT_COMPONENT_TYPE.get(UNBREAKING), 4);*/

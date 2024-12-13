@@ -1,0 +1,31 @@
+{
+  "multipart": [
+    {
+      "apply": {
+        "model": "strife3:block/bone_spire_post"
+      }
+    },
+    {
+      "apply": {
+        "model": "strife3:block/bone_spire_noside"
+      }
+    },
+    {
+      "apply": {
+        "model": "strife3:block/bone_spire_noside_alt"
+      }
+    },
+    {
+      "apply": {
+        "model": "strife3:block/bone_spire_noside_alt",
+        "y": 90
+      }
+    },
+    {
+      "apply": {
+        "model": "strife3:block/bone_spire_noside",
+        "y": 270
+      }
+    }
+  ]
+}

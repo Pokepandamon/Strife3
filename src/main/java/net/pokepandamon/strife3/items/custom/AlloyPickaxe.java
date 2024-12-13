@@ -31,6 +31,7 @@ public class AlloyPickaxe extends CustomPickaxe {
         stack.addEnchantment(player.getWorld().getRegistryManager().get(RegistryKeys.ENCHANTMENT).getEntry(EFFICIENCY).get(), 3);
         stack.addEnchantment(player.getWorld().getRegistryManager().get(RegistryKeys.ENCHANTMENT).getEntry(MENDING).get(), 1);
         stack.set(DataComponentTypes.ENCHANTMENTS, stack.getEnchantments().withShowInTooltip(false));
+        stack.set(DataComponentTypes.ENCHANTMENT_GLINT_OVERRIDE, false);
         /*stack.addEnchantment(UNBREAKING, 4);
         stack.addEnchantment(Enchantments.UNBREAKING, 1);
         stack.addEnchantment(Registries.ENCHANTMENT_EFFECT_COMPONENT_TYPE.get(UNBREAKING), 4);*/

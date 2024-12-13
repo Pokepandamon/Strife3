@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "strife3:block/brain_coral_slab"
+    },
+    "type=double": {
+      "model": "strife3:block/brain_coral_full_slab"
+    },
+    "type=top": {
+      "model": "strife3:block/brain_coral_slab_top"
+    }
+  }
+}

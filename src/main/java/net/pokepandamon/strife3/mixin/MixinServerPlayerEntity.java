@@ -1,38 +1,22 @@
 package net.pokepandamon.strife3.mixin;
 
-import com.mojang.authlib.GameProfile;
-import net.minecraft.block.Block;
-import net.minecraft.block.entity.EnderChestBlockEntity;
-import net.minecraft.client.gui.screen.TitleScreen;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffects;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.ArmorItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.packet.s2c.play.*;
 import net.minecraft.registry.Registries;
-import net.minecraft.registry.RegistryKey;
-import net.minecraft.registry.RegistryKeys;
-import net.minecraft.server.integrated.IntegratedServerLoader;
 import net.minecraft.server.network.ServerPlayNetworkHandler;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvent;
-import net.minecraft.sound.SoundEvents;
 import net.minecraft.text.Style;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
-import net.minecraft.util.Identifier;
-import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.minecraft.world.dimension.DimensionType;
-import net.minecraft.world.dimension.DimensionTypes;
 import net.pokepandamon.strife3.ServerPlayerMixinInterface;
 import net.pokepandamon.strife3.Strife3;
-import net.pokepandamon.strife3.Strife3Dimensions;
 import net.pokepandamon.strife3.WorldFlags;
-import net.pokepandamon.strife3.items.CustomItem;
 import net.pokepandamon.strife3.items.ModItems;
 import net.pokepandamon.strife3.music.Ambient;
 import net.pokepandamon.strife3.music.Song;
@@ -44,8 +28,6 @@ import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-
-import java.util.ArrayList;
 
 @Mixin(ServerPlayerEntity.class)
 public abstract class MixinServerPlayerEntity extends MixinEntityPlayer implements ServerPlayerMixinInterface {
@@ -68,6 +50,9 @@ public abstract class MixinServerPlayerEntity extends MixinEntityPlayer implemen
     @Unique private int deepOpticEnteredText = 0;
     @Unique private int deepOpticLeftText = 0;
     @Unique private int factoryEnteredText = 0;
+    @Unique private boolean updateWorld = false;
+    @Unique private int[] totalProgress = new int[2];
+    @Unique private int[] chunkProgress = new int[3];
 
 //
     protected MixinServerPlayerEntity(EntityType<? extends LivingEntity> entityType, World world) {
@@ -80,6 +65,9 @@ public abstract class MixinServerPlayerEntity extends MixinEntityPlayer implemen
         this.soundTick();
         this.armorDeEquipTick();
         this.loreReadout();
+        if(this.updateWorld){
+            this.worldUpdaterTick();
+        }
     }
 
     @Override
@@ -419,5 +407,21 @@ public abstract class MixinServerPlayerEntity extends MixinEntityPlayer implemen
             }
             factoryEnteredText--;
         }
+    }
+
+    public void startWorldUpdater(){
+        if(!this.updateWorld){
+            this.totalProgress[0] = -56;
+            this.totalProgress[1] = -56;
+            this.chunkProgress[0] = 0;
+            this.chunkProgress[1] = 0;
+            this.chunkProgress[2] = 0;
+        }
+        this.updateWorld = true;
+    }
+
+    public void worldUpdaterTick(){
+        this.setPos(this.totalProgress[0] * 16, 256, this.totalProgress[1]);
+        //for(int i = 0; i < )
     }
 }

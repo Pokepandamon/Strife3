@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "strife3:block/deep_horn_coral_block",
+      "y": 270
+    },
+    "facing=north": {
+      "model": "strife3:block/deep_horn_coral_block",
+      "y": 180
+    },
+    "facing=south": {
+      "model": "strife3:block/deep_horn_coral_block"
+    },
+    "facing=west": {
+      "model": "strife3:block/deep_horn_coral_block",
+      "y": 90
+    }
+  }
+}

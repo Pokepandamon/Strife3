@@ -1,6 +1,9 @@
 package net.pokepandamon.strife3;
 
 import net.fabricmc.api.ClientModInitializer;
+import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
+import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
+import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayConnectionEvents;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityModelLayerRegistry;
@@ -15,6 +18,9 @@ import net.minecraft.block.BlockState;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.ClientPlayNetworkHandler;
 import net.minecraft.client.network.ClientPlayerEntity;
+import net.minecraft.client.option.KeyBinding;
+import net.minecraft.client.render.RenderLayer;
+import net.minecraft.client.util.InputUtil;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.decoration.ItemFrameEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -22,12 +28,14 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.text.Text;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.TypedActionResult;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.hit.EntityHitResult;
 import net.minecraft.world.World;
+import net.pokepandamon.strife3.block.ModBlocks;
 import net.pokepandamon.strife3.entity.Strife3Entities;
 import net.pokepandamon.strife3.entity.client.BlockEntityRenderer;
 import net.pokepandamon.strife3.entity.client.GreaterVerluerModel;
@@ -36,19 +44,59 @@ import net.pokepandamon.strife3.entity.client.Strife3ModelLayers;
 import net.pokepandamon.strife3.entity.custom.GreaterVerluerEntity;
 import net.pokepandamon.strife3.networking.*;
 import org.jetbrains.annotations.Nullable;
+import org.lwjgl.glfw.GLFW;
 
 import java.util.ArrayList;
 
 public class Strife3Client implements ClientModInitializer {
     public static int permissionLevel;
+    private static KeyBinding updateWorld;
+
+    static{
+        updateWorld = KeyBindingHelper.registerKeyBinding(new KeyBinding(
+                "strife3.keybind.update_world", // The translation key of the keybinding's name
+                InputUtil.Type.KEYSYM, // The type of the keybinding, KEYSYM for keyboard, MOUSE for mouse.
+                GLFW.GLFW_KEY_H, // The keycode of the key
+                "category.strife3.test" // The translation key of the keybinding's category.
+        ));
+    }
 
     @Override
     public void onInitializeClient() {
+        BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.deepBrainCoralFan, RenderLayer.getCutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.deepBubbleCoralFan, RenderLayer.getCutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.deepFireCoralFan, RenderLayer.getCutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.deepTubeCoralFan, RenderLayer.getCutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.deepHornCoralFan, RenderLayer.getCutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.boneKelpShoot, RenderLayer.getCutout());
+
+        BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.deepBrainCoral, RenderLayer.getCutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.deepBubbleCoral, RenderLayer.getCutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.deepFireCoral, RenderLayer.getCutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.deepTubeCoral, RenderLayer.getCutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.deepHornCoral, RenderLayer.getCutout());
+
+        BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.deepBrainCoralWallFan, RenderLayer.getCutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.deepBubbleCoralWallFan, RenderLayer.getCutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.deepFireCoralWallFan, RenderLayer.getCutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.deepTubeCoralWallFan, RenderLayer.getCutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.deepHornCoralWallFan, RenderLayer.getCutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.boneKelpShootWall, RenderLayer.getCutout());
+
+        BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.boneSpire, RenderLayer.getTranslucent());
+
         ClientPlayConnectionEvents.JOIN.register(this::onJoinServer);
         UseBlockCallback.EVENT.register(this::onBlockUse);
         UseEntityCallback.EVENT.register(this::onEntityUse);
         AttackEntityCallback.EVENT.register(this::onEntityAttack);
         UseItemCallback.EVENT.register(this::onItemUse);
+
+        ClientTickEvents.END_CLIENT_TICK.register(client -> {
+            while (updateWorld.wasPressed()) {
+                //client.player.sendMessage(Text.literal("Key 1 was pressed!"), false);
+                ClientPlayNetworking.send(new WorldUpdateC2SPayload(true));
+            }
+        });
 
         ClientPlayNetworking.registerGlobalReceiver(PermissionLevelRequestS2CPayload.ID, (payload, context) -> {
             permissionLevel = payload.permissionValue();

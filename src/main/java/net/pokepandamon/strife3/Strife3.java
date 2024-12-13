@@ -18,7 +18,9 @@ import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
 import net.minecraft.block.entity.BlockEntity;
+import net.minecraft.block.entity.ChestBlockEntity;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.screen.TitleScreen;
 import net.minecraft.client.network.ClientPlayerEntity;
@@ -102,6 +104,7 @@ public class Strife3 implements ModInitializer {
 	public static final Area netherideFactory = new Area(509,9,-126,574,77,-31);
 	public static final Area deepOpticChanger = new Area(-430, 4, 264, -391,31, 338);
 	public static ArrayList<Strife3Doors> doors = new ArrayList<>();
+	public static final Identifier WORLD_UPDATE_PACKET = Identifier.of("strife3", "world_update");
 
 	static {
 		MORPHINE = Registry.register(Registries.STATUS_EFFECT, Identifier.of(MOD_ID, "morphine"), new MorphineEffect());
@@ -118,6 +121,7 @@ public class Strife3 implements ModInitializer {
 	@Override
 	public void onInitialize() {
 		//
+
 		ModItemGroups.registerItemGroups();
 		ModItems.registerModItems();
 		ModBlocks.registerModBocks();
@@ -231,6 +235,7 @@ public class Strife3 implements ModInitializer {
 		//ServerBlockEntityEvents  // Ensure you are writing the boolean first
 		//responseBuf.writeBlockPos(blockPos);    // If you are sending more data, make sure the order is the same as on the server
 		PayloadTypeRegistry.playC2S().register(AdminBooleanRequestC2SPayload.ID, AdminBooleanRequestC2SPayload.CODEC);
+		PayloadTypeRegistry.playC2S().register(WorldUpdateC2SPayload.ID, WorldUpdateC2SPayload.CODEC);
 		PayloadTypeRegistry.playS2C().register(AdminBooleanRequestS2CPayload.ID, AdminBooleanRequestS2CPayload.CODEC);
 		PayloadTypeRegistry.playC2S().register(PermissionLevelRequestC2SPayload.ID, PermissionLevelRequestC2SPayload.CODEC);
 		PayloadTypeRegistry.playS2C().register(PermissionLevelRequestS2CPayload.ID, PermissionLevelRequestS2CPayload.CODEC);
@@ -247,6 +252,11 @@ public class Strife3 implements ModInitializer {
 
 		ServerPlayNetworking.registerGlobalReceiver(AdminBooleanRequestC2SPayload.ID, (payload, context) -> {
 			((ServerPlayerMixinInterface) context.player()).setClientAdminValue(payload.adminValue());
+		});
+
+		ServerPlayNetworking.registerGlobalReceiver(WorldUpdateC2SPayload.ID, (payload, context) -> {
+			//((ServerPlayerMixinInterface) context.player()).;
+			context.player().sendMessage(Text.literal("It worked!"));
 		});
 
 		ServerPlayNetworking.registerGlobalReceiver(PermissionLevelRequestC2SPayload.ID, (payload, context) -> {

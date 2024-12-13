@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "strife3:block/deep_bubble_corallite"
+    },
+    "type=double": {
+      "model": "strife3:block/deep_bubble_corallite_full_slab"
+    },
+    "type=top": {
+      "model": "strife3:block/deep_bubble_corallite_slab_top"
+    }
+  }
+}
