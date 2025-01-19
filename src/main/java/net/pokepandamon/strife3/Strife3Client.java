@@ -6,6 +6,7 @@ import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayConnectionEvents;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
+import net.fabricmc.fabric.api.client.rendering.v1.ColorProviderRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityModelLayerRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
 import net.fabricmc.fabric.api.event.player.AttackEntityCallback;
@@ -84,12 +85,21 @@ public class Strife3Client implements ClientModInitializer {
         BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.boneKelpShootWall, RenderLayer.getCutout());
 
         BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.boneSpire, RenderLayer.getTranslucent());
+        BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.boneProtrusion, RenderLayer.getCutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.boneProtrusionWall, RenderLayer.getCutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.obsidianCrystal, RenderLayer.getTranslucent());
+        BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.whispyMoss, RenderLayer.getTranslucent());
 
         ClientPlayConnectionEvents.JOIN.register(this::onJoinServer);
         UseBlockCallback.EVENT.register(this::onBlockUse);
         UseEntityCallback.EVENT.register(this::onEntityUse);
         AttackEntityCallback.EVENT.register(this::onEntityAttack);
         UseItemCallback.EVENT.register(this::onItemUse);
+
+        ColorProviderRegistry.BLOCK.register((state, world, pos, tintIndex) ->
+                        0x62C744, // Default color if biome info isn't available
+                ModBlocks.kelpGrowth
+        );
 
         ClientTickEvents.END_CLIENT_TICK.register(client -> {
             while (updateWorld.wasPressed()) {

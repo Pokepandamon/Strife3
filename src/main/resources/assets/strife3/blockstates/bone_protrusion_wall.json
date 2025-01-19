@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "strife3:block/bone_protrusion_wall",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "strife3:block/bone_protrusion_wall"
+    },
+    "facing=south": {
+      "model": "strife3:block/bone_protrusion_wall",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "strife3:block/bone_protrusion_wall",
+      "y": 270
+    }
+  }
+}

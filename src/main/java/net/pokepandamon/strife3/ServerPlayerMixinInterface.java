@@ -1,5 +1,7 @@
 package net.pokepandamon.strife3;
 
+import java.io.IOException;
+
 public interface ServerPlayerMixinInterface {
     void customServerPlayerTick();
     void locationTick();
@@ -10,4 +12,9 @@ public interface ServerPlayerMixinInterface {
     void ambientTick();
     void armorDeEquipTick();
     void setSongTimer(int newTimer);
+    void startWorldUpdater() throws IOException;
+    void worldUpdaterTick();
+    void testSchematics();
+    void testTransformations(int schematicNumber);
+
 }

@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "hanging=false": {
+      "model": "strife3:block/obsidian_fruit"
+    },
+    "hanging=true": {
+      "model": "strife3:block/obsidian_fruit_hanging"
+    }
+  }
+}

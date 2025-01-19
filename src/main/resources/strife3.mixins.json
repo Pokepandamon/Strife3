@@ -19,7 +19,9 @@
 		"MixinClientPlayer",
 		"MixinWorldRenderer",
 		"MixinBackgroundRenderer",
-		"MixinLootableInventory"
+		"MixinLootableInventory",
+		"MixinGameTab",
+		"MixinWorldCreator"
 	],
 	"injectors": {
 		"defaultRequire": 1

@@ -1,6 +1,7 @@
 package net.pokepandamon.strife3;
 
 import com.mojang.brigadier.Command;
+import com.mojang.brigadier.arguments.IntegerArgumentType;
 import com.mojang.brigadier.arguments.StringArgumentType;
 import com.mojang.brigadier.builder.LiteralArgumentBuilder;
 import com.mojang.brigadier.builder.RequiredArgumentBuilder;
@@ -17,8 +18,7 @@ import net.fabricmc.fabric.api.networking.v1.PayloadTypeRegistry;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
 import net.fabricmc.loader.api.FabricLoader;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
+import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.ChestBlockEntity;
 import net.minecraft.client.MinecraftClient;
@@ -40,9 +40,12 @@ import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.mob.DrownedEntity;
 import net.minecraft.entity.mob.ShulkerEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.BucketItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
+import net.minecraft.nbt.NbtIo;
+import net.minecraft.nbt.NbtSizeTracker;
 import net.minecraft.registry.BuiltinRegistries;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
@@ -78,8 +81,14 @@ import net.pokepandamon.strife3.networking.*;
 import org.jetbrains.annotations.Nullable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.spongepowered.asm.mixin.Unique;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.nio.file.Path;
 import java.util.ArrayList;
+import java.util.Map;
 import java.util.function.Predicate;
 
 public class Strife3 implements ModInitializer {
@@ -105,6 +114,13 @@ public class Strife3 implements ModInitializer {
 	public static final Area deepOpticChanger = new Area(-430, 4, 264, -391,31, 338);
 	public static ArrayList<Strife3Doors> doors = new ArrayList<>();
 	public static final Identifier WORLD_UPDATE_PACKET = Identifier.of("strife3", "world_update");
+	public static final ArrayList<SchematicReference> schematics = new ArrayList<>();
+	public static final String folderPath = "C:/Users/swane/Documents/Moding/Strife 3/src/main/resources/data/strife3/schematics";
+	private static Path schematicsPath;
+	private static Path modResourcesPath = FabricLoader.getInstance().getModContainer(Strife3.MOD_ID)
+			.orElseThrow(() -> new RuntimeException("Could not find your mod container!"))
+			.getRootPaths().get(0);
+	//@Unique private ArrayList<>
 
 	static {
 		MORPHINE = Registry.register(Registries.STATUS_EFFECT, Identifier.of(MOD_ID, "morphine"), new MorphineEffect());
@@ -116,11 +132,38 @@ public class Strife3 implements ModInitializer {
 		STRENGTH_DRUG = Registry.register(Registries.STATUS_EFFECT, Identifier.of(MOD_ID, "strength_drug"), new StrengthDrugEffect());
 		SUPER_DRUG = Registry.register(Registries.STATUS_EFFECT, Identifier.of(MOD_ID, "super_drug"), new SuperDrugEffect());
 		protectedAreas = new ArrayList<Area>();
+
+		File folder = new File(folderPath);
+
+		// Create an ArrayList to store the files
+		ArrayList<File> fileList = new ArrayList<>();
+
+		// Check if the folder exists and is a directory
+		if (folder.exists() && folder.isDirectory()) {
+			// Iterate through all files in the folder
+			for (File file : folder.listFiles()) {
+				// Add each file to the ArrayList
+				fileList.add(file);
+			}
+		} else {
+			System.out.println("The provided path is not a valid folder.");
+		}
+
+		schematicsPath = modResourcesPath.resolve("data/strife3/schematics");
 	}
 
 	@Override
 	public void onInitialize() {
 		//
+		ServerWorldEvents.LOAD.register((server, world) -> {
+			if (world.getRegistryKey() == ServerWorld.OVERWORLD) {
+				// Get the spawn position from level.dat or specify custom coordinates
+
+				// Set the world spawn directly
+				BlockPos customSpawn = world.getLevelProperties().getSpawnPos();
+				world.setSpawnPos(customSpawn, 0.0f); // Second argument is spawn angle (optional)
+			}
+		});
 
 		ModItemGroups.registerItemGroups();
 		ModItems.registerModItems();
@@ -138,16 +181,11 @@ public class Strife3 implements ModInitializer {
 		protectedAreas.add(netherideFactory);
 		protectedAreas.add(deepOpticChanger);
 
-		ColorProviderRegistry.BLOCK.register((state, world, pos, tintIndex) ->
-						0x62C744, // Default color if biome info isn't available
-				ModBlocks.kelpGrowth
-		);
-
 		// You can also register the item color provider if needed
-		ColorProviderRegistry.ITEM.register((stack, tintIndex) ->
+		/*ColorProviderRegistry.ITEM.register((stack, tintIndex) ->
 						0x62C744, // Default color for inventory item if you want it green
 				ModBlocks.kelpGrowth
-		);
+		);*/
 		//Registry.register(Registry.BIOME, CUSTOM_BIOME_KEY.getValue(), ModBiomes.createCustomBiome());
 
 		CommandRegistrationCallback.EVENT.register((dispatcher, registryAccess, environment) -> dispatcher.register(CommandManager.literal("depths")
@@ -255,8 +293,12 @@ public class Strife3 implements ModInitializer {
 		});
 
 		ServerPlayNetworking.registerGlobalReceiver(WorldUpdateC2SPayload.ID, (payload, context) -> {
-			//((ServerPlayerMixinInterface) context.player()).;
-			context.player().sendMessage(Text.literal("It worked!"));
+            try {
+                ((ServerPlayerMixinInterface) context.player()).startWorldUpdater();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+            //context.player().sendMessage(Text.literal("It worked!"));
 		});
 
 		ServerPlayNetworking.registerGlobalReceiver(PermissionLevelRequestC2SPayload.ID, (payload, context) -> {
@@ -305,6 +347,44 @@ public class Strife3 implements ModInitializer {
 					((PlayerMixinInterface) (context.getSource().getPlayer())).useMorphine();
 					return 1;
 				})));
+
+		CommandRegistrationCallback.EVENT.register((dispatcher, registryAccess, environment) -> dispatcher.register(CommandManager.literal("checkschematic")
+				.executes(context -> {
+					//context.getSource().getPlayer().playSoundToPlayer(Ambient.ABOVE_WATER, SoundCategory.MASTER, 1F, 1F);
+					//context.getSource().getPlayer().playSound(Ambient.ABOVE_WATER, 1F, 1F);
+					/*if(schematics.isEmpty()){
+						for (File file : schematicsPath.toFile().listFiles()) {
+							NbtSizeTracker sizeTracker = new NbtSizeTracker(2097152, 500);
+							try {
+								Strife3.LOGGER.info(file.getName());
+								if (replacementKeys.containsKey(file.getName())) {
+									this.schematics.add(new SchematicReference(NbtIo.readCompressed(new FileInputStream(file), sizeTracker), globalReplacementKeys, replacementKeys.get(file.getName()),file.getName()));
+								} else {
+									this.schematics.add(new SchematicReference(NbtIo.readCompressed(new FileInputStream(file), sizeTracker), globalReplacementKeys,file.getName()));
+								}
+							} catch (IOException e) {
+								throw new RuntimeException(e);
+							}
+						}
+					}
+					for(SchematicReference schematic : schematics){
+						schematic.checkPosition(context.getSource().getPlayer().getBlockPos(), context.getSource().getWorld());
+					}*/
+					((ServerPlayerMixinInterface) context.getSource().getPlayer()).testSchematics();
+					return 1;
+				})));
+
+		CommandRegistrationCallback.EVENT.register((dispatcher, registryAccess, environment) ->
+				dispatcher.register(CommandManager.literal("checktransformation")
+						.then(CommandManager.argument("schematicNumber", IntegerArgumentType.integer())
+								.executes(context -> {
+									// Get the player and schematic number from the command context
+									int schematicNumber = IntegerArgumentType.getInteger(context, "schematicNumber");
+									((ServerPlayerMixinInterface) context.getSource().getPlayer()).testTransformations(schematicNumber);
+									return 1; // Return a success value
+								}))
+				)
+		);
 
 
 		/*ItemTooltipCallback.EVENT.register((stack, tooltipContext, tooltipType, tooltip) -> {

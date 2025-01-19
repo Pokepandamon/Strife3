@@ -9,8 +9,8 @@ import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.Direction;
 import net.pokepandamon.strife3.Strife3;
-import net.pokepandamon.strife3.block.custom.BoneSpire;
-import net.pokepandamon.strife3.block.custom.RadiationStation;
+import net.pokepandamon.strife3.block.custom.*;
+import net.pokepandamon.strife3.block.custom.MossBlock;
 
 import java.util.ArrayList;
 
@@ -69,8 +69,22 @@ public class ModBlocks {
     public static final Block deepHornCorallite = registerBlock("deep_horn_corallite", new SlabBlock(AbstractBlock.Settings.create().strength(5F, 3F))); // Smooth Sandstone Slab Pick
     public static final Block deepHornCoralFan = registerFanBlock("deep_horn_coral_fan", new DeadCoralFanBlock(AbstractBlock.Settings.create().strength(5F, 3F))); // Horn Coral Fan Pick
     public static final Block deepHornCoralWallFan = registerFanBlock("deep_horn_coral_wall_fan", new DeadCoralWallFanBlock(AbstractBlock.Settings.create().strength(5F, 3F))); // Horn Coral Fan Pick
+    public static final Block boneProtrusion = registerFanBlock("bone_protrusion", new BoneProtrusion(AbstractBlock.Settings.create().strength(5F, 3F)));
+    public static final Block boneProtrusionWall = registerFanBlock("bone_protrusion_wall", new DeadCoralWallFanBlock(AbstractBlock.Settings.create().strength(5F, 3F))); // Horn Coral Fan Pick
+    public static final Block spineBlock = registerBlock("spine_block", new Block(AbstractBlock.Settings.create().strength(5F, 3F).luminance((state) -> 15))); // Sea Lanturn Pick
+    public static final Block obsidianCrystal = registerBlock("obsidian_crystal", new PaneBlock(AbstractBlock.Settings.create().strength(5F, 3F))); // Black Stained Glass Pane Pick
+    public static final Block seedlingHeart = registerBlock("seedling_heart", new Block(AbstractBlock.Settings.create().strength(5F, 3F).luminance((state) -> 15))); // Sea Lanturn Pick
+    public static final Block obsidianFruit = registerBlock("obsidian_fruit", new LanternBlock(AbstractBlock.Settings.create().strength(5F, 3F).luminance((state) -> 10))); // Soul Lanturn Pick
+    public static final Block mossBlock = registerMossBlock("moss_block", new MossBlock(AbstractBlock.Settings.create().strength(5F, 3F)));
+    public static final Block mutatedMoss = registerBlock("mutated_moss", new GlazedTerracottaBlock(AbstractBlock.Settings.create().strength(5F, 3F))); // Green Glazed Terracota Hoe
+    public static final Block mossflower = registerBlock("mossflower", new Mossflower(AbstractBlock.Settings.create().strength(0.25F).luminance(state -> state.get(Mossflower.PICKLES) * 3)));
+    public static final Block whispyMoss = registerBlock("whispy_moss", new PaneBlock(AbstractBlock.Settings.create().strength(5F, 3F))); // Green Stained Glass Pane Pick
+    public static final Block kelpyCobblestoneWall = registerBlock("kelpy_cobblestone_wall", new WallBlock(AbstractBlock.Settings.create().strength(5F, 3F)));
+    public static final Block deepBloom = registerBlock("deep_bloom", new Block(AbstractBlock.Settings.create().strength(5F, 3F).luminance((state) -> 15)));
+    public static final Block deepSeaPickle = registerBlock("deep_sea_pickle", new DeepSeaPickle(AbstractBlock.Settings.create().strength(0.25F).luminance(state -> state.get(Mossflower.PICKLES) * 3)));
+    public static final Block boneSlab = registerBlock("bone_slab", new SlabBlock(AbstractBlock.Settings.create().strength(5F, 3F))); //Smooth Quartz Slab Pick
 
-    //public static ArrayList<ArrayList<Block>> fanBlocks = new ArrayList<>();
+    //public static ArrayList<ArrayList<Block>> fanBlocks = new ArrayList<>(); .luminance((state) -> 15)
 
     /*static{
         deepBrainCoralFan = registerFanBlock("deep_brain_coral_fan", new DeadCoralFanBlock(AbstractBlock.Settings.create().strength(5F, 3F))); // Brain Coral Fan Pick
@@ -114,6 +128,10 @@ public class ModBlocks {
         return Registry.register(Registries.BLOCK, Identifier.of(Strife3.MOD_ID, name), block);
     }
 
+    private static Block registerMossBlock(String name, Block block){
+        return Registry.register(Registries.BLOCK, Identifier.of(Strife3.MOD_ID, name), block);
+    }
+
     private static Block registerFanBlock(String name, Block block){
         return Registry.register(Registries.BLOCK, Identifier.of(Strife3.MOD_ID, name), block);
     }
@@ -136,5 +154,6 @@ public class ModBlocks {
         registerFanItem("deep_tube_coral_fan", deepTubeCoralFan, deepTubeCoralWallFan);
         registerFanItem("deep_fire_coral_fan", deepFireCoralFan, deepFireCoralWallFan);
         registerFanItem("deep_horn_coral_fan", deepHornCoralFan, deepHornCoralWallFan);
+        registerFanItem("bone_protrusion", boneProtrusion, boneProtrusionWall);
     }
 }

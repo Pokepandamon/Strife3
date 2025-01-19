@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "density=1": {
+      "model": "strife3:block/moss_block_1"
+    },
+    "density=2": {
+      "model": "strife3:block/moss_block_2"
+    },
+    "density=3": {
+      "model": "strife3:block/moss_block_3"
+    },
+    "density=4": {
+      "model": "strife3:block/moss_block_4"
+    }
+  }
+}

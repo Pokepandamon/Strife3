@@ -100,5 +100,17 @@ public class ModItemGroups {
                 entries.add(ModBlocks.deepHornCoralBlock);
                 entries.add(ModBlocks.deepHornCorallite);
                 entries.add(ModBlocks.deepHornCoralFan);
+                entries.add(ModBlocks.boneProtrusion);
+                entries.add(ModBlocks.spineBlock);
+                entries.add(ModBlocks.obsidianCrystal);
+                entries.add(ModBlocks.obsidianFruit);
+                entries.add(ModBlocks.seedlingHeart);
+                entries.add(ModBlocks.mutatedMoss);
+                entries.add(ModBlocks.mossflower);
+                entries.add(ModBlocks.whispyMoss);
+                entries.add(ModBlocks.kelpyCobblestoneWall);
+                entries.add(ModBlocks.boneSlab);
+                entries.add(ModBlocks.deepBloom);
+                entries.add(ModBlocks.deepSeaPickle);
             }).build());
 }

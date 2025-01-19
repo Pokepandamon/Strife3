@@ -5,6 +5,7 @@ import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;
 import net.pokepandamon.strife3.Strife3;
+import net.pokepandamon.strife3.block.ModBlocks;
 import net.pokepandamon.strife3.items.custom.*;
 
 public class ModItems {
@@ -53,6 +54,7 @@ public class ModItems {
     public static final Item SPEED_DRUG = registerItem("speed_drug", new SpeedDrug("speed_drug", (new Item.Settings()).maxCount(1)));
     public static final Item STRENGTH_DRUG = registerItem("strength_drug", new StrengthDrug("strength_drug", (new Item.Settings()).maxCount(1)));
     public static final Item SUPER_DRUG = registerItem("super_drug", new SuperDrug("super_drug", (new Item.Settings()).maxCount(1)));
+    public static final Item MOSS_BUCKET = registerItem("moss_bucket", new MossBucket(ModBlocks.mossBlock,(new Item.Settings()).maxCount(1)));
 
     public static void registerModItems() {
         Strife3.LOGGER.info("Registered Mod Items for " + Strife3.MOD_ID);

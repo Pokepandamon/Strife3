@@ -1,0 +1,14 @@
+{
+  "variants": {
+    "form=true": [
+      {
+        "model": "strife3:block/bone_protrusion_1"
+      }
+    ],
+    "form=false": [
+      {
+        "model": "strife3:block/bone_protrusion_0"
+      }
+    ]
+  }
+}
