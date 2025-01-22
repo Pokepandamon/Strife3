@@ -20,10 +20,7 @@ import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.pokepandamon.strife3.SchematicReference;
-import net.pokepandamon.strife3.ServerPlayerMixinInterface;
-import net.pokepandamon.strife3.Strife3;
-import net.pokepandamon.strife3.WorldFlags;
+import net.pokepandamon.strife3.*;
 import net.pokepandamon.strife3.items.ModItems;
 import net.pokepandamon.strife3.music.Ambient;
 import net.pokepandamon.strife3.music.Song;
@@ -80,15 +77,16 @@ public abstract class MixinServerPlayerEntity extends MixinEntityPlayer implemen
     //@Unique private static Map<String, String> deepCoralReplacement;
     @Unique private ArrayList<SchematicReference> schematics = new ArrayList<>();
     @Unique private int schematicSize;
-    @Unique private static int schematicReplacementStartX = -56;
-    @Unique private static int schematicReplacementStartZ = -56;
-    @Unique private static int schematicReplacementEndX = 55;
-    @Unique private static int schematicReplacementEndZ = 55;
-    @Unique private static int schematicReplacementMaxY = 255;
+    @Unique public static int schematicReplacementStartX = -56;
+    @Unique public static int schematicReplacementStartZ = -56;
+    @Unique public static int schematicReplacementEndX = 55;
+    @Unique public static int schematicReplacementEndZ = 55;
+    @Unique public static int schematicReplacementMaxY = 255;
     @Unique private static int totalChunks;
     @Unique private int finishedChunks;
     @Unique private LocalDateTime replacementStartTime;
     @Unique private int replacedSchematics;
+    @Unique private ThreeDArray schematicResults = new ThreeDArray();
 
     static{
         schematicsPath = modResourcesPath.resolve("data/strife3/schematics");
