@@ -77,16 +77,16 @@ public abstract class MixinServerPlayerEntity extends MixinEntityPlayer implemen
     //@Unique private static Map<String, String> deepCoralReplacement;
     @Unique private ArrayList<SchematicReference> schematics = new ArrayList<>();
     @Unique private int schematicSize;
-    @Unique public static int schematicReplacementStartX = -56;
-    @Unique public static int schematicReplacementStartZ = -56;
-    @Unique public static int schematicReplacementEndX = 55;
-    @Unique public static int schematicReplacementEndZ = 55;
-    @Unique public static int schematicReplacementMaxY = 255;
+    @Unique private static int schematicReplacementStartX = Strife3.schematicReplacementStartX;
+    @Unique private static int schematicReplacementStartZ = Strife3.schematicReplacementStartZ;
+    @Unique private static int schematicReplacementEndX = Strife3.schematicReplacementEndX;
+    @Unique private static int schematicReplacementEndZ = Strife3.schematicReplacementEndZ;
+    @Unique private static int schematicReplacementMaxY = Strife3.schematicReplacementMaxY;
     @Unique private static int totalChunks;
     @Unique private int finishedChunks;
     @Unique private LocalDateTime replacementStartTime;
     @Unique private int replacedSchematics;
-    @Unique private ThreeDArray schematicResults = new ThreeDArray();
+    @Unique private ArrayList<ArrayList<ArrayList<ArrayList<SchematicReference.SchematicSearchResult>>>> schematicResults = new ArrayList<>(118);
 
     static{
         schematicsPath = modResourcesPath.resolve("data/strife3/schematics");
@@ -787,6 +787,20 @@ public abstract class MixinServerPlayerEntity extends MixinEntityPlayer implemen
         this.replacementStartTime = LocalDateTime.now();
         this.replacedSchematics = 0;
 
+        for(int s = 0; s < schematicSize; s++) {
+            ArrayList<ArrayList<ArrayList<SchematicReference.SchematicSearchResult>>> newSChunk = new ArrayList<>(33);
+            for (int k = 0; k < 33; k++) {
+                ArrayList<ArrayList<SchematicReference.SchematicSearchResult>> newZChunk = new ArrayList<>((schematicReplacementEndX - schematicReplacementStartX + 1) * 16);
+                for (int i = 0; i < (schematicReplacementEndX - schematicReplacementStartX + 1) * 16; i++) {
+                    ArrayList<SchematicReference.SchematicSearchResult> newXChunk = new ArrayList<>(schematicReplacementMaxY);
+                    newZChunk.add(newXChunk);
+                }
+                newSChunk.add(newZChunk);
+            }
+            schematicResults.add(newSChunk);
+        }
+        System.gc();
+
         /*try {
             // Read the NBT data from the file
             NbtCompound nbtData = NbtIo.readCompressed(nbtFile);
@@ -807,10 +821,9 @@ public abstract class MixinServerPlayerEntity extends MixinEntityPlayer implemen
         this.teleport(this.getServerWorld(), this.totalProgress[0] * 16 + this.chunkProgress[0], 256, this.totalProgress[1] * 16 + this.chunkProgress[1], 0F, -90F);
         for(int i = 1; i < schematicReplacementMaxY; i++){
             ArrayList<SchematicReference.SchematicSearchResult> foundSchematics = new ArrayList<>();
-            int j = 0;
-            for(SchematicReference schematic : this.schematics){
-                j++;
-                SchematicReference.SchematicSearchResult currentSchematicResult = schematic.checkPositionAndSurroundings(new BlockPos(this.totalProgress[0] * 16 + this.chunkProgress[0], i, this.totalProgress[1] * 16 + this.chunkProgress[1]),this.getServerWorld());
+            for(int j = 0; j < this.schematicSize; j++){
+                SchematicReference schematic = this.schematics.get(j);
+                SchematicReference.SchematicSearchResult currentSchematicResult = schematic.checkPositionAndSurroundings(new BlockPos(this.totalProgress[0] * 16 + this.chunkProgress[0], i, this.totalProgress[1] * 16 + this.chunkProgress[1]),this.getServerWorld(), this.schematicResults.get(j));
                 if(currentSchematicResult.result()){
                     foundSchematics.add(currentSchematicResult);
                 }
@@ -846,8 +859,19 @@ public abstract class MixinServerPlayerEntity extends MixinEntityPlayer implemen
                     if(this.totalProgress[1] == schematicReplacementEndZ){
                         this.updateWorld = false;
                     }else{
-                        this.totalProgress[0] = -2;
+                        this.totalProgress[0] = schematicReplacementStartX;
                         this.totalProgress[1]++;
+                        if(this.totalProgress[1] != schematicReplacementStartZ + 1) {
+                            for (ArrayList<ArrayList<ArrayList<SchematicReference.SchematicSearchResult>>> indivdualSchematic : schematicResults) {
+                                for (int i = 0; i < 16; i++) {
+                                    indivdualSchematic.set(32, indivdualSchematic.getFirst());
+                                    for(ArrayList<SchematicReference.SchematicSearchResult> individualBlocks : indivdualSchematic.get(32)){
+                                        individualBlocks.clear();
+                                    }
+                                    indivdualSchematic.removeFirst();
+                                }
+                            }
+                        }
                     }
                 }else{
                     this.totalProgress[0]++;
@@ -885,10 +909,8 @@ public abstract class MixinServerPlayerEntity extends MixinEntityPlayer implemen
         Strife3.LOGGER.info("Check Schematic at: " + this.getBlockPos());
 
         ArrayList<SchematicReference.SchematicSearchResult> foundSchematics = new ArrayList<>();
-        int j = 0;
-        for(SchematicReference schematic : this.schematics){
-            j++;
-            SchematicReference.SchematicSearchResult currentSchematicResult = schematic.checkPositionAndSurroundings(this.getBlockPos(),this.getServerWorld());
+        for(int j = 0; j < this.schematicSize; j++){
+            SchematicReference.SchematicSearchResult currentSchematicResult = schematics.get(j).checkPositionAndSurroundings(this.getBlockPos(),this.getServerWorld(),schematicResults.get(j));
             if(currentSchematicResult.result()){
                 Strife3.LOGGER.info("Found " + currentSchematicResult.schematic().name + " with confidence: " + (1 - currentSchematicResult.blockPercentage()));
                 foundSchematics.add(currentSchematicResult);

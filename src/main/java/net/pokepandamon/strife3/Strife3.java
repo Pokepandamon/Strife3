@@ -120,6 +120,11 @@ public class Strife3 implements ModInitializer {
 	private static Path modResourcesPath = FabricLoader.getInstance().getModContainer(Strife3.MOD_ID)
 			.orElseThrow(() -> new RuntimeException("Could not find your mod container!"))
 			.getRootPaths().get(0);
+	public static int schematicReplacementStartX = -56;
+	public static int schematicReplacementStartZ = -56;
+	public static int schematicReplacementEndX = 55;
+	public static int schematicReplacementEndZ = 55;
+	public static int schematicReplacementMaxY = 255;
 	//@Unique private ArrayList<>
 
 	static {

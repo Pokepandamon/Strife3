@@ -12,6 +12,7 @@ import net.minecraft.util.BlockMirror;
 import net.minecraft.util.BlockRotation;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
+import net.pokepandamon.strife3.mixin.MixinServerPlayerEntity;
 import org.apache.logging.log4j.core.jmx.Server;
 
 import java.util.ArrayList;
@@ -574,22 +575,72 @@ public class SchematicReference {
         }
     }
 
-    public SchematicSearchResult checkPositionAndSurroundings(BlockPos blockPos, ServerWorld world){
-        SchematicSearchResult currentBlockResult = checkPosition(blockPos,world);
+    public SchematicSearchResult checkPositionAndSurroundings(BlockPos blockPos, ServerWorld world, ArrayList<ArrayList<ArrayList<SchematicReference.SchematicSearchResult>>> previousSchematicResults){
+        int aX = blockPos.getX() - (Strife3.schematicReplacementStartX * 16);
+        int aY = blockPos.getY() - 1;
+        int aZ = blockPos.getZ() - (Strife3.schematicReplacementStartZ * 16);
+        SchematicSearchResult currentBlockResult;
+        if(aX == 0 && aY == 0 && aZ == 0){
+            currentBlockResult = checkPosition(blockPos,world);
+            previousSchematicResults.get(aZ).get(aX).add(currentBlockResult);
+        }else{
+            currentBlockResult = previousSchematicResults.get(aZ).get(aX).get(aY);
+        }
+        if(aZ >= 16){
+            aZ = (aZ % 16) + 16;
+        }
         //Strife3.LOGGER.info(currentBlockResult.toString());
         //Strife3.LOGGER.info(currentBlockResult.toString());
-        if(currentBlockResult.result()) {
-            //Strife3.LOGGER.info("Found a schematic and now checking the surroundings");
-            ArrayList<SchematicSearchResult> cubeCheck = new ArrayList<>();
-            for (int i = -1; i < 2; i++) {
-                for (int j = -1; j < 2; j++) {
-                    for (int k = -1; k < 2; k++) {
-                        if(!(i == 0 && j == 0 && k == 0)){
-                            cubeCheck.add(checkPosition(blockPos.add(i, j, k), world));
+        //Strife3.LOGGER.info("Found a schematic and now checking the surroundings");
+        ArrayList<SchematicSearchResult> cubeCheck = new ArrayList<>();
+        int startingX = -1;
+        int endingX = 1;
+        int startingY = -1;
+        int endingY = 1;
+        int startingZ = -1;
+        int endingZ = 1;
+        if (aX == 0) {
+            startingX = 0;
+        } else if (aX == (Strife3.schematicReplacementEndX - Strife3.schematicReplacementStartX + 1)) {
+            endingX = 0;
+        }
+        if (aY == 0) {
+            startingY = 0;
+        } else if (aY == Strife3.schematicReplacementMaxY - 1) {
+            endingY = 0;
+        }
+        if (aZ == 0) {
+            startingZ = 0;
+        } else if (aZ == (Strife3.schematicReplacementEndZ - Strife3.schematicReplacementStartZ + 1)) {
+            endingZ = 0;
+        }
+        for (int i = startingX; i <= endingX; i++) {
+            for (int j = startingY; j <= endingY; j++) {
+                for (int k = startingZ; k <= endingZ; k++) {
+                    //Strife3.LOGGER.info("Ax,Ay,Az,i,j,k: " + aX + "," + aY + "," + aZ + "," + i + "," + j + "," + k);
+                    if (!(i == 0 && j == 0 && k == 0)) {
+                        if (aZ == 0) {
+                            if (i == -1 || k == -1 || j == -1) {
+                                cubeCheck.add(previousSchematicResults.get(aZ + k).get(aX + i).get(aY + j));
+                            } else {
+                                SchematicSearchResult newPosition = checkPosition(blockPos.add(i, j, k), world);
+                                cubeCheck.add(newPosition);
+                                previousSchematicResults.get(aZ + k).get(aX + i).add(newPosition);
+                            }
+                        } else {
+                            if (k != 1) {
+                                cubeCheck.add(previousSchematicResults.get(aZ + k).get(aX + i).get(aY + j));
+                            } else {
+                                SchematicSearchResult newPosition = checkPosition(blockPos.add(i, j, k), world);
+                                cubeCheck.add(newPosition);
+                                previousSchematicResults.get(aZ + k).get(aX + i).add(newPosition);
+                            }
                         }
                     }
                 }
             }
+        }
+        if(currentBlockResult.result()) {
 
             double currentBlockPercentage = currentBlockResult.blockPercentage();
             for(SchematicSearchResult cubeResult : cubeCheck){

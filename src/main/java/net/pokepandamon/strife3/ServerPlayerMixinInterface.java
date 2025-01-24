@@ -16,5 +16,4 @@ public interface ServerPlayerMixinInterface {
     void worldUpdaterTick();
     void testSchematics();
     void testTransformations(int schematicNumber);
-
 }
