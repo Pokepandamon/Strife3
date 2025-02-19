@@ -12,6 +12,7 @@ import net.minecraft.util.BlockMirror;
 import net.minecraft.util.BlockRotation;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
+import net.pokepandamon.strife3.block.ModBlocks;
 import net.pokepandamon.strife3.mixin.MixinServerPlayerEntity;
 import org.apache.logging.log4j.core.jmx.Server;
 
@@ -46,6 +47,13 @@ public class SchematicReference {
     private ArrayList<ArrayList<ArrayList<ArrayList<BlockState>>>> transformationPointer = new ArrayList<>();
     private ArrayList<ArrayList<ReplacementBlock>> transformationReplacementPointer = new ArrayList<>();
     private SchematicSearchResult schematicSearchResult = new SchematicSearchResult();
+    private static ArrayList<Block> connectingBlocks = new ArrayList<>();
+
+    static{
+        connectingBlocks.add(ModBlocks.boneSpire);
+        connectingBlocks.add(ModBlocks.obsidianCrystal);
+        connectingBlocks.add(ModBlocks.whispyMoss);
+    }
 
     /*static{
         bloodKelpRoot = Map.ofEntries(Map.entry("minecraft:mushroom_stem[down=false,east=false,north=false,south=false,up=false,west=false]","strife3:bone_kelp_root"),
@@ -576,9 +584,9 @@ public class SchematicReference {
     }
 
     public SchematicSearchResult checkPositionAndSurroundings(BlockPos blockPos, ServerWorld world, ArrayList<ArrayList<ArrayList<SchematicReference.SchematicSearchResult>>> previousSchematicResults){
-        int aX = blockPos.getX() - (Strife3.schematicReplacementStartX * 16);
+        int aX = blockPos.getX() - (Strife3.schematicReplacementStartX);
         int aY = blockPos.getY() - 1;
-        int aZ = blockPos.getZ() - (Strife3.schematicReplacementStartZ * 16);
+        int aZ = blockPos.getZ() - (Strife3.schematicReplacementStartZ);
         SchematicSearchResult currentBlockResult;
         if(aX == 0 && aY == 0 && aZ == 0){
             currentBlockResult = checkPosition(blockPos,world);
@@ -586,8 +594,8 @@ public class SchematicReference {
         }else{
             currentBlockResult = previousSchematicResults.get(aZ).get(aX).get(aY);
         }
-        if(aZ >= 16){
-            aZ = (aZ % 16) + 16;
+        if(aZ >= 1){
+            aZ = 2;
         }
         //Strife3.LOGGER.info(currentBlockResult.toString());
         //Strife3.LOGGER.info(currentBlockResult.toString());
@@ -693,9 +701,18 @@ public class SchematicReference {
                                 /*if (debug) {
                                     Strife3.LOGGER.info("Was looking for: " + this.transformationPointer.get(transformation).get(k).get(j).get(i) + " Found: " + world.getBlockState(blockPos.add(i, k, j)));
                                 }*/
-                                nonMatchingBlocks++;
-                                if (nonMatchingBlocks > maximumError) {
-                                    break current;
+                                if(connectingBlocks.contains(this.transformationPointer.get(transformation).get(k).get(j).get(i).getBlock())){
+                                    if(!this.transformationPointer.get(transformation).get(k).get(j).get(i).getBlock().equals(world.getBlockState(blockPos.add(i, k, j)).getBlock())){
+                                        nonMatchingBlocks++;
+                                        if (nonMatchingBlocks > maximumError) {
+                                            break current;
+                                        }
+                                    }
+                                }else {
+                                    nonMatchingBlocks++;
+                                    if (nonMatchingBlocks > maximumError) {
+                                        break current;
+                                    }
                                 }
                             }
                         }
@@ -734,6 +751,12 @@ public class SchematicReference {
             //}else{
             if(world.getBlockState(blockPos.add(replacementBlock.getOffsetX(), replacementBlock.getOffsetY(), replacementBlock.getOffsetZ())).equals(replacementBlock.getReplaced())) {
                 world.setBlockState(blockPos.add(replacementBlock.getOffsetX(), replacementBlock.getOffsetY(), replacementBlock.getOffsetZ()), replacementBlock.getBlockState());
+            }else{
+                if(connectingBlocks.contains(world.getBlockState(blockPos.add(replacementBlock.getOffsetX(), replacementBlock.getOffsetY(), replacementBlock.getOffsetZ())).getBlock())){
+                    if(world.getBlockState(blockPos.add(replacementBlock.getOffsetX(), replacementBlock.getOffsetY(), replacementBlock.getOffsetZ())).getBlock().equals(replacementBlock.getReplaced().getBlock())){
+                        world.setBlockState(blockPos.add(replacementBlock.getOffsetX(), replacementBlock.getOffsetY(), replacementBlock.getOffsetZ()), replacementBlock.getBlockState());
+                    }
+                }
             }
             //}
         }

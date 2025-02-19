@@ -31,7 +31,7 @@ public class Strife3Config {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        ClientPlayNetworking.send(new AdminBooleanRequestC2SPayload(admin));
+        //ClientPlayNetworking.send(new AdminBooleanRequestC2SPayload(admin));
     }
 
     // Load the configuration from the config file
